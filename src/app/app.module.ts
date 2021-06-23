@@ -10,7 +10,7 @@ import { HarmonicLibModule } from './harmonic-lib/harmonic-lib.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HarmonicLibModule,
   ],
