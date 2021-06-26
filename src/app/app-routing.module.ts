@@ -12,6 +12,10 @@ const routes: Routes = [
     loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule)
   },
   {
+    path: 'careers',
+    loadChildren: () => import('./careers/careers.module').then(m => m.CareersModule)
+  },
+  {
     path: '**',
     component: ErrorPageComponent,
   }

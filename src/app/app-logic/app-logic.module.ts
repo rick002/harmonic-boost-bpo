@@ -7,7 +7,7 @@ import { AppLogicComponent } from './app-logic.component';
 
 @NgModule({
   declarations: [
-    AppLogicComponent
+    AppLogicComponent,
   ],
   imports: [
     CommonModule,

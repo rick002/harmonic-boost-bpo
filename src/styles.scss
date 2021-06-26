@@ -542,7 +542,7 @@ Main Banner CSS
 }
 .item-bg2 {
     background: {
-        image: url(assets/img/main-banner2.jpg);
+        image: url(assets/img/login-banner.jpg);
     }
 }
 .item-bg3 {
@@ -557,7 +557,7 @@ Main Banner CSS
 }
 .item-bg5 {
     background: {
-        image: url(assets/img/hero-6.jpg);
+        image: url(assets/img/main-banner-2.jpg);
     }
 }
 .item-bg6 {
@@ -574,6 +574,9 @@ Main Banner CSS
     background: {
         image: url(assets/img/main-banner8.jpg);
     }
+}
+.register-banner {
+    background: { image: url(assets/img/register.jpg)};
 }
 .main-banner-content {
     max-width: 700px;
