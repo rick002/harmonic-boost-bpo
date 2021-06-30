@@ -5,7 +5,20 @@
                 <app-form-filter [sector]="sector"></app-form-filter>
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-4">
+            <div class="col-lg-12 col-md-12 d-flex justify-content-between align-items-center">
+                <h4>6 Jobs Found</h4>
+                <a href="#">
+                    <i class="icofont-filter"></i>
+                    Most Recent
+                </a>
+                <a href="#">
+                    <i class="icofont-filter"></i>
+                    10 Per Page
+                </a>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3 col-md-12">
                 <div class="sidebar">
                     <app-check-filter [options]="datePosted" title="date posted"></app-check-filter>
@@ -13,6 +26,7 @@
                     <app-check-filter [options]="sector" title="sector"></app-check-filter>
                 </div>
             </div>
+            
             <div class="col-lg-8 col-md-12">
                 <app-position-post></app-position-post>
                 <app-pagination-area></app-pagination-area>
