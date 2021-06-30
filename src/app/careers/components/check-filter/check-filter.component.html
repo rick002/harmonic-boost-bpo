@@ -1,0 +1,14 @@
+<div class="widget widget_categories mt-5">
+    <h3 class="widget-title">
+        {{ title | titlecase}}
+    </h3>
+    <ul style="list-style: none;">
+        <form>
+            <li *ngFor="let option of options">
+                <input type="checkbox" class="me-1 form-check-input">
+                {{ option?.label | titlecase}}
+            </li>
+        </form>
+    </ul>
+    
+</div>

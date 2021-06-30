@@ -1,0 +1,21 @@
+$transition: .5s;
+
+
+ul {
+    li {
+        position: relative;
+        border-top: 1px solid #eeeeee;
+        padding: {
+            top: 10px;
+            bottom: 10px;
+            left: 18px;
+        };
+        &::before {  
+            background: white !important;
+        }
+    }
+}
+
+.form-check-input {
+    transition: $transition;;
+}
