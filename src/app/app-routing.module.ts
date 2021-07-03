@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule)
+    loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule),
   },
   {
     path: 'careers',

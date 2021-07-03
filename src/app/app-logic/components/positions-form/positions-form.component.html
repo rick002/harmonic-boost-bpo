@@ -1,0 +1,74 @@
+<section class="ptb-70" style="background-image: url(bg.jpg);">
+    <div class="container" >
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-lg-8 col-md-12">
+                <div class="single-blog-post">
+                    <div class="blog-post-content">
+                        <div id="comments" class="comments-area">
+                            <div id="respond" class="comment-respond">
+                                <h3 class="comment-reply-title">{{ positionsForm.title | titlecase }}</h3>
+                                <form id="commentform" class="comment-form">
+                                    <p class="comment-form-author">
+                                        <label for="position" class="col-form-label">Position</label>
+                                        <input id="position" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                    </p>
+                                    <p class="comment-form-email">
+                                        <label for="company" class="col-form-label">Company</label>
+                                        <input id="company" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                    </p>
+                                    <p class="comment-form-url">
+                                        <label for="address" class="col-form-label">Address</label>
+                                        <input id="address" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                    </p>
+        
+                                    <p class="comment-form-url">
+                                        <label for="city" class="col-form-label">City</label>
+                                        <select id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                            <option value="" selected hidden></option>
+                                            <option value="dr">Santo Domingo</option>
+                                        </select>
+        
+                                    </p>
+                                    <p class="comment-form-url">
+                                        <label for="country" class="col-form-label">Country</label>
+                                        <select id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                            <option value="" selected hidden></option>
+                                            <option value="dr">Dominican Republic</option>
+                                        </select>
+        
+                                    </p>
+                                    <p class="comment-form-url">
+                                        <label for="job_type" class="col-form-label">Job Type</label>
+                                        <select id="job_type" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                            <option value="" selected hidden></option>
+                                            <option value="f-t">Full-Time</option>
+                                            <option value="p-t">Part-Time</option>
+                                            <option value="f">Freelance</option>
+                                        </select>
+        
+                                    </p>
+                                    <div class="form-check form-switch mb-5" *ngIf="!positionsForm.isCreate">
+                                        <input class="form-check-input" [(ngModel)]="positionsForm.isRemoveButtonVisible" name="isRemoveVisible" type="checkbox" id="remove_flag">
+                                        <label class="form-check-label" for="remove_flag">
+                                                Would you like to remove this position instead?
+                                        </label>
+                                    </div>
+                                    <p *ngIf="!positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
+                                        <button type="button" class="btn btn-primary w-50">
+                                            {{ positionsForm.buttonLabel | titlecase }}
+                                        </button>
+                                    </p>
+                                    <p *ngIf="positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
+                                        <button type="button" class="btn btn-danger w-50">
+                                            Remove This Position
+                                        </button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
