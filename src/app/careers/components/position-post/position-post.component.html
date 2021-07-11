@@ -23,7 +23,7 @@
                 </blockquote>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="post-tag">
-                        <button class="btn btn-primary">Apply Now</button>
+                        <button type="button" (click)="cardEvent.emit()" class="btn btn-primary">Apply Now</button>
                     </div>
                     <span routerLink="/blog-details" class="read-more-btn">
                         {{ post.modality }}

@@ -11,14 +11,29 @@ import { ContactMeComponent } from './components/contact-me/contact-me.component
 import { FeaturesComponent } from './components/features/features.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [LandingComponent, HeroComponent, AboutUsComponent, ServicesComponent, ContactMeComponent, FeaturesComponent, RegisterComponent, LoginComponent],
+  declarations: [
+    LandingComponent, 
+    HeroComponent, 
+    AboutUsComponent, 
+    ServicesComponent, 
+    ContactMeComponent, 
+    FeaturesComponent, 
+    RegisterComponent, 
+    LoginComponent
+  ],
   imports: [
     CommonModule,
     LandingRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     HarmonicLibModule,
-  ]
+    
+  ],
+
 })
 export class LandingModule { }

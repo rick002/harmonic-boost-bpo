@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-position-post',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./position-post.component.scss']
 })
 export class PositionPostComponent implements OnInit {
+  @Input() savedPosts: Array<any> = [];
+  @Output() cardEvent: EventEmitter<any> = new EventEmitter<any>();
+
   posts: Array<any> = [
     {
       title: 'Inbound Customer Service Associate ',

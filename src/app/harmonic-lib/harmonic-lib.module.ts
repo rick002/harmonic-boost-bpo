@@ -5,6 +5,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 

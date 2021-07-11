@@ -8,9 +8,10 @@ import { BannerComponent } from './components/banner/banner.component';
 import { PositionPostComponent } from './components/position-post/position-post.component';
 import { PaginationAreaComponent } from './components/pagination-area/pagination-area.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckFilterComponent } from './components/check-filter/check-filter.component';
 import { FormFilterComponent } from './components/form-filter/form-filter.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -28,6 +29,8 @@ import { FormFilterComponent } from './components/form-filter/form-filter.compon
     CommonModule,
     CareersRoutingModule,
     HarmonicLibModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     FormsModule,
   ]
 })

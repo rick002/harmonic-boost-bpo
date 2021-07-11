@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CheckFilters } from '../models/check-filters.model';
+import { CheckFilters } from '../../models/check-filters.model';
 
 @Component({
   selector: 'app-check-filter',
