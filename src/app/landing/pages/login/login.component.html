@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
                         <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Sorry</strong> Something went wrong!
+                            <strong>Sorry</strong> {{ errorMessage | titlecase }}!
                             <button type="button" class="btn-close" (click)="isError = false" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                         <div class="banner-form">
@@ -30,6 +30,11 @@
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input id="password" type="password" class="form-control" formControlName="password">
+                                    <div class="mt-2 d-flex flex-row-reverse">
+                                        <span>
+                                            <a routerLink='/recovery'>Forgot Password?</a>
+                                        </span>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </form>

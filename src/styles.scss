@@ -575,9 +575,23 @@ Main Banner CSS
         image: url(assets/img/main-banner8.jpg);
     }
 }
+
+.recovery-banner {
+    background: {
+        image: url(assets/img/recovery.jpg);
+    }
+}
+
 .register-banner {
     background: { image: url(assets/img/register.jpg)};
 }
+
+.update-password-banner {
+    background: {
+        image: url(assets/img/edit_pass.jpg);
+    }
+}
+
 .main-banner-content {
     max-width: 700px;
     position: relative;

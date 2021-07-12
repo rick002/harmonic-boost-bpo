@@ -13,6 +13,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RecoveryComponent } from './pages/recovery/recovery.component';
+import { EditPassComponent } from './pages/edit-pass/edit-pass.component';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     ContactMeComponent, 
     FeaturesComponent, 
     RegisterComponent, 
-    LoginComponent
+    LoginComponent, RecoveryComponent, EditPassComponent
   ],
   imports: [
     CommonModule,

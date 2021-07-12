@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   isError: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private router: Router,
@@ -19,11 +20,12 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginForm: FormGroup = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+    email: ['', Validators.required],
+    password: ['', Validators.required],
   });
 
   ngOnInit(): void {}
+
 
   handleLogin(response: any): void {
     console.log(response);
@@ -36,10 +38,15 @@ export class LoginComponent implements OnInit {
   }
 
   handleError(info: any): void {
-    console.log(info);
     if (info) {
+      this.errorMessage = 'user or password incorrect';
       this.isError = true;
     }
+  }
+
+  closeErrorAlert(): void {
+    this.errorMessage = '';
+    this.isError = false;
   }
 
   login(): void {
@@ -49,6 +56,9 @@ export class LoginComponent implements OnInit {
         (response) => this.handleLogin(response),
         (err) => this.handleError(err),
       );
+    } else {
+      this.errorMessage = 'all fields required';
+      this.isError = true;
     }
   }
 }
