@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule),
   },
   {
