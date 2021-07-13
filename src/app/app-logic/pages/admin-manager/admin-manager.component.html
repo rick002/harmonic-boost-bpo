@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="main-banner main-banner-with-form recovery-banner">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 col-md-12">
+                        <div class="main-banner-content">
+                            <span>We Are Boost</span>
+                            <h1>The Best <b>BPO</b> Experience</h1>
+                            <p class="font-weight-bold">
+                                Here you can upgrade or downgrade user simply by entering a valid email account.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
+                        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Sorry</strong> Something went wrong!
+                            <button type="button" class="btn-close" (click)="isError = false" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="banner-form">
+                            <form [formGroup]="roleManagerForm">
+                                <div class="form-group mb-2">
+                                    <label class="font-weight-bold" for="email">Enter The Email</label>
+                                    <input id="email" type="email" class="form-control" formControlName="email">
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="downgrade_flag" formControlName="isDowngrade">
+                                    <label class="form-check-label" for="downgrade_flag">
+                                            Would you like to downgrade this user instead?
+                                    </label>
+                                </div>
+                                <button *ngIf="!downgrade" type="button" class="btn btn-primary">Upgrade Role</button>
+                                <button *ngIf="downgrade" type="button" class="btn btn-danger">Downgrade Role</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

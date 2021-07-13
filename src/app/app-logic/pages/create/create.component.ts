@@ -15,6 +15,8 @@ export class CreateComponent implements OnInit {
     isRemoveButtonVisible: false,
   };
 
+  username: string = 'julio garcia';
+
   constructor() { }
 
   ngOnInit(): void {
