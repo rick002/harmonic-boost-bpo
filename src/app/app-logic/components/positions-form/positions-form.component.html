@@ -26,7 +26,6 @@
                                             <option value="" selected hidden></option>
                                             <option value="dr">Dominican Republic</option>
                                         </select>
-        
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="city" class="col-form-label">City</label>
@@ -34,7 +33,14 @@
                                             <option value="" selected hidden></option>
                                             <option value="dr">Santo Domingo</option>
                                         </select>
-        
+                                    </p>
+                                    <p class="comment-form-url">
+                                        <label for="sector" class="col-form-label">Sector</label>
+                                        <select id="sector" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                            <option value="" selected hidden></option>
+                                            <option value="accounting">Accounting</option>
+                                            <option value="automotive">Automotive</option>
+                                        </select>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="job_type" class="col-form-label">Job Type</label>
