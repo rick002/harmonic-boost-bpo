@@ -7,15 +7,21 @@
                         <i class="icofont-calendar"></i>
                         {{ post.date }}
                     </span>
+                    <span class="text-muted" style="font-size: 12px;">
+                        <i class="icofont-building-alt"></i>
+                        {{ post.sector | titlecase}}
+                    </span>
                 </div>
                 <h3><a routerLink="/blog-details">{{ post.title }}</a></h3>
                 <blockquote class="blockquote">
                     <p>
-                        <span class="d-block mt-2 blockquote-footer"><cite title="Source Title">
-                            {{ post.company }}
-                        </cite>
+                        <span class="d-block mt-2 blockquote-footer">
+                            <cite title="this is the company where this position belongs">
+                                {{ post.company }}
+                            </cite>
                         </span>
-                        <span style="font-size: 15px;">
+                       
+                        <span style="font-size: 13px;">
                             <i class="icofont-google-map"></i>
                             {{ post.address }}
                         </span>
