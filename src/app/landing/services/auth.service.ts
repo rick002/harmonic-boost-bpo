@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User, UserToSignup } from '../models/user.model';
 import { TokenService } from './token.service';
@@ -15,12 +16,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private router: Router,
   ) { }
 
-  isLoggedIn(): boolean {
-    return this.tokenService.isTokenExpired();
-  }
+  
 
   login(user: User): Observable<any> {
     const params: HttpParams = new HttpParams()
@@ -43,5 +43,21 @@ export class AuthService {
   setTokenInfo(authInfo: any): void {
     this.tokenService.setAuthInfo(authInfo);
   }
+
+  isLoggedIn(): boolean {
+    return this.tokenService.isTokenExpired();
+  }
   
+  roleBasedRedirection(): void {
+    const info: any = this.tokenService.getAuthInfo();
+    if (info) {
+      if (info.userInfo.rol === 'normal') {
+        this.router.navigate(['/careers']);
+      } else if (info.userInfo.rol === 'admin') {
+        this.router.navigate(['/admin']);
+      }
+    }
+  }
+
+
 }

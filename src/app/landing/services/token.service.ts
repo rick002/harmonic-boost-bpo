@@ -5,7 +5,6 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class TokenService {
-
   constructor() {}
 
   isToken(): boolean {
@@ -15,6 +14,7 @@ export class TokenService {
 
   getAuthInfo(): any {
     const tokenInfo: string | null = localStorage.getItem('auth-info');
+    console.log(tokenInfo);
     return tokenInfo ? JSON.parse(tokenInfo) : null;
   }
 

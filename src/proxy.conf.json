@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "https://boost-bpo-api.herokuapp.com",
+      "target": "https://boostbpo-springboot-api.herokuapp.com",
       "secure": true,
       "changeOrigin": true,
       "logLevel": "debug"
