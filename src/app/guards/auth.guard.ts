@@ -14,7 +14,6 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean  {
     const isLoggedIn: boolean = this.authService.isLoggedIn();
-    console.log('Is LoggedIn True: ', isLoggedIn);
     if (isLoggedIn) {
       this.authService.roleBasedRedirection();
       return isLoggedIn;

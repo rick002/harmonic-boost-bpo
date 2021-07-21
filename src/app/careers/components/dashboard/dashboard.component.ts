@@ -23,7 +23,14 @@ export class DashboardComponent implements OnInit {
 
   handleResponse(response: any): void {
     console.log(response);
-    this.posts = response;
+    this.posts = response.positions;
+    this.posts.forEach(
+      post => {
+        post.positionCompany = post.positionCompany.replace(',', '');
+        post.positionAddress = post.positionAddress.replace(',', '');
+        post.positionTitle = post.positionTitle.replace(',', '');
+      }
+    );
   }
 
   handleError(err: any): void {
