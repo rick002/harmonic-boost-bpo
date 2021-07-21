@@ -1,27 +1,44 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) 
+    private platformId: Object
+  ) { }
 
   isToken(): boolean {
-    const token: string | null = localStorage.getItem('auth-info');
+    let token: string | null = '';
+    if (isPlatformBrowser(this.platformId)) {
+      token = localStorage.getItem('auth-info');
+    }
     return token ? true : false;
   }
 
   getAuthInfo(): any {
-    const tokenInfo: string | null = localStorage.getItem('auth-info');
-    console.log(tokenInfo);
+    let tokenInfo: string | null = '';
+    if (isPlatformBrowser(this.platformId)) {
+      tokenInfo = localStorage.getItem('auth-info');
+      console.log(tokenInfo);
+    }
+    
     return tokenInfo ? JSON.parse(tokenInfo) : null;
   }
 
   removeAuthInfo(): void {
-    if (this.isToken()) {
+    if (this.isToken() && isPlatformBrowser(this.platformId)) {
       console.log('<Remove Auth Token Method> -> There is a token to remove');
       localStorage.removeItem('auth-info');
+    }
+  }
+
+  setAuthInfo(tokenInfo: any): void {
+    if (tokenInfo && isPlatformBrowser(this.platformId)) {
+      localStorage.setItem('auth-info', JSON.stringify(tokenInfo));
     }
   }
 
@@ -57,10 +74,6 @@ export class TokenService {
     return false;
   }
 
-  setAuthInfo(tokenInfo: any): void {
-    if (tokenInfo) {
-      localStorage.setItem('auth-info', JSON.stringify(tokenInfo));
-    }
-  }
+ 
 
 }
