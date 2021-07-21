@@ -7,7 +7,7 @@ import { ErrorPageComponent } from './harmonic-lib/pages/error-page/error-page.c
 const routes: Routes = [
   { 
     path: '',
- 
+    canActivate: [NonAuthGuard],
     loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule) 
   },
   {

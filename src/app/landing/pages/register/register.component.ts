@@ -34,15 +34,18 @@ export class RegisterComponent implements OnInit {
   }
 
   handleError(error: any): void {
-    if (error) {
+    if (!error.loggedIn) {
       this.isError = true;
+      this.errorMessage = error?.message;
     }
   }
 
   handleSignUp(response: any): void {
     if (response && response.loggedIn) {
       this.authService.setTokenInfo(response);
-      this.router.navigate(['/admin']);
+      this.authService.roleBasedRedirection();
+    } else {
+      this.handleError(response);
     }
   }
 

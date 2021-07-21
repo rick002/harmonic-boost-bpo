@@ -5,7 +5,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class TokenService {
-  constructor() {}
+  constructor() { }
 
   isToken(): boolean {
     const token: string | null = localStorage.getItem('auth-info');
@@ -18,24 +18,42 @@ export class TokenService {
     return tokenInfo ? JSON.parse(tokenInfo) : null;
   }
 
-  getTokenInfo(): any {
+  removeAuthInfo(): void {
+    if (this.isToken()) {
+      console.log('<Remove Auth Token Method> -> There is a token to remove');
+      localStorage.removeItem('auth-info');
+    }
+  }
+
+  getRawToken(): string {
+    if (this.isToken()) {
+      const rawToken: string = this.getAuthInfo()?.token;
+      console.log('Raw Token', rawToken);
+      return rawToken;
+    }
+    return '';
+  }
+
+  getDecodedToken(): any {
     if (this.isToken()) {
       const service: JwtHelperService = new JwtHelperService();
-      const tokenInfo: any = this.getAuthInfo();
-      const decodedToken: any = service.decodeToken(tokenInfo.token);
+      const authInfo: any = this.getAuthInfo();
+      const decodedToken: any = service.decodeToken(authInfo.token);
+      console.log('Decoded Token: ', decodedToken);
       return decodedToken;
     }
     return null;
   }
 
-  isTokenExpired(): boolean {
+  isTokenNotExpired(): boolean {
     if (this.isToken()) {
-      const tokenInfo: any = this.getTokenInfo();
+      const rawToken: any = this.getRawToken();
       const service: JwtHelperService = new JwtHelperService();
-      const isExpired: boolean = service.isTokenExpired(tokenInfo.token);
-      console.log(tokenInfo.token);
-      return isExpired;
+      const isExpired: boolean = service.isTokenExpired(rawToken);
+      console.log('Is Token Expired: ', isExpired);
+      return !isExpired;
     }
+    console.log('There is no token at all');
     return false;
   }
 
@@ -44,4 +62,5 @@ export class TokenService {
       localStorage.setItem('auth-info', JSON.stringify(tokenInfo));
     }
   }
+
 }

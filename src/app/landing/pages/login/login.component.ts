@@ -28,18 +28,17 @@ export class LoginComponent implements OnInit {
 
 
   handleLogin(response: any): void {
-    console.log(response);
     if (response && response.loggedIn) {
       this.authService.setTokenInfo(response);
-      this.router.navigate(['/admin']);
+      this.authService.roleBasedRedirection();
     } else {
-      this.isError = true;
+      this.handleError(response);
     }
   }
 
   handleError(info: any): void {
-    if (info) {
-      this.errorMessage = 'user or password incorrect';
+    if (!info?.loggedIn) {
+      this.errorMessage = info?.message;
       this.isError = true;
     }
   }

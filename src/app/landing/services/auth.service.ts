@@ -20,8 +20,6 @@ export class AuthService {
     private router: Router,
   ) { }
 
-  
-
   login(user: User): Observable<any> {
     const params: HttpParams = new HttpParams()
     .set('email', user.email)
@@ -41,11 +39,21 @@ export class AuthService {
   }
 
   setTokenInfo(authInfo: any): void {
+    console.log('Setting Token Info: ', authInfo);
     this.tokenService.setAuthInfo(authInfo);
   }
 
+  getTokenInfo(): any {
+    console.log('Getting Token Info: ');
+    return this.tokenService.getAuthInfo();
+  }
   isLoggedIn(): boolean {
-    return this.tokenService.isTokenExpired();
+    return this.tokenService.isTokenNotExpired();
+  }
+
+  isAdmin(): boolean {
+    const info: any = this.tokenService.getAuthInfo();
+    return info && info.userInfo?.rol === 'admin' ? true : false;
   }
   
   roleBasedRedirection(): void {
@@ -59,5 +67,9 @@ export class AuthService {
     }
   }
 
+  logout(): void {
+    this.tokenService.removeAuthInfo();
+    this.router.navigate(['/']);
+  }
 
 }
