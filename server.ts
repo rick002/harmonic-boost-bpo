@@ -2,6 +2,7 @@ import 'zone.js/dist/zone-node';
 
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
+import * as proxy from 'http-proxy-middleware';
 import { join } from 'path';
 
 import { AppServerModule } from './src/main.server';
@@ -13,6 +14,15 @@ export function app(): express.Express {
   const server = express();
   const distFolder = join(process.cwd(), 'dist/harmonic/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
+  
+  // Configuring The API Proxy In Production 
+  
+  const apiProxy = proxy.createProxyMiddleware('/api', { 
+    target: 'https://boostbpo-springboot-api.herokuapp.com',
+    changeOrigin: true,
+  });
+
+  server.use('/api', apiProxy);
 
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({

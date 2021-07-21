@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationCancel, NavigationEnd } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { environment } from 'src/environments/environment.prod';
 declare let $: any;
 
 @Component({
@@ -17,6 +18,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.recallJsFuntions();
+    console.log(environment.production);
+    console.log(environment.apiUrl);
   }
 
   recallJsFuntions() {

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { User, UserToSignup } from '../models/user.model';
 import { TokenService } from './token.service';
 
@@ -14,17 +15,23 @@ export class AuthService {
      'Content-Type': 'application/x-www-form-urlencoded' 
   });
 
+  
+
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
     private router: Router,
   ) { }
 
+  getFullLink(endpoint: string): string {
+    return `${environment.apiUrl}${endpoint}`;
+  }
+
   login(user: User): Observable<any> {
     const params: HttpParams = new HttpParams()
     .set('email', user.email)
     .set('password', user.password);
-    return this.http.post<any>('/api/login', params, { headers: this.headers });
+    return this.http.post<any>( '/api/login', params, { headers: this.headers });
   }
 
   signUp(user: UserToSignup): Observable<any> {
