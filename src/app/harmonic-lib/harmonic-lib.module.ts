@@ -5,7 +5,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 
@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     NavbarComponent,
     ErrorPageComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +25,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FooterComponent,
     NavbarComponent,
     ErrorPageComponent,
-    PreloaderComponent
+    PreloaderComponent,
+    AlertComponent,
   ]
 })
 export class HarmonicLibModule { }

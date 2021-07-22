@@ -9,18 +9,19 @@
                             <span>We Are Boost</span>
                             <h1>The Best <b>BPO</b> Experience</h1>
                             <p>
-                                Don't miss out on the opportunity to work hand in hand with a passionate and vibrant team committed to redefining the outsourcing experience.
+                                Don't miss out on the opportunity to work hand in hand with a passionate and vibrant
+                                team committed to redefining the outsourcing experience.
                             </p>
                             <div class="btn-box">
-                                <a href="https://www.youtube.com/watch?v=bk7McNUjWgw" class="video-btn popup-youtube"><i class="icofont-ui-play"></i> Watch Video</a>
+                                <a href="https://www.youtube.com/watch?v=bk7McNUjWgw" class="video-btn popup-youtube"><i
+                                        class="icofont-ui-play"></i> Watch Video</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
-                        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Sorry</strong> {{ errorMessage | titlecase }}!
-                            <button type="button" class="btn-close" (click)="isError = false" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
+                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
+                        </app-alert>
                         <div class="banner-form">
                             <form [formGroup]="loginForm" (ngSubmit)="login()">
                                 <div class="form-group">
@@ -29,7 +30,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input id="password" type="password" class="form-control" formControlName="password">
+                                    <input id="password" type="password" class="form-control"
+                                        formControlName="password">
                                     <div class="mt-2 d-flex flex-row-reverse">
                                         <span>
                                             <a routerLink='/recovery'>Forgot Password?</a>

@@ -4,7 +4,7 @@
         <div class="d-table-cell">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-6 col-md-12 mb-5">
                         <div class="main-banner-content">
                             <span>We Are Creative</span>
                             <h1>The Best <b>BPO</b> Experience</h1>
@@ -16,12 +16,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
-                        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Sorry</strong> {{ errorMessage | titlecase }}!
-                            <button type="button" class="btn-close" (click)="isError = false" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <div class="banner-form mt-5">
+                    <div class="mt-5 col-lg-5 col-md-12 offset-lg-1 offset-md-0">
+                        <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
+                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
+                            </app-alert>
+                        <div class="contact-form">
                             <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
                                 <div class="form-group mb-3">
                                     <label>Your First Name</label>
@@ -56,4 +55,5 @@
         </div>
     </div>
 </div>
+
 

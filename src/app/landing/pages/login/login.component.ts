@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,25 +9,31 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  isError: boolean = false;
-  errorMessage: string = '';
+  isVisible: boolean = false;
+  successAlert: boolean = false;
+  loadingAlert: boolean = false;
+  failAlert: boolean = false;
+
+  message: string = 'trying to login...';
 
   constructor(
-    private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+  ) { }
 
   loginForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void { }
 
   handleLogin(response: any): void {
     if (response && response.loggedIn) {
+      this.loadingAlert = false;
+      this.failAlert = false;
+      this.successAlert = true;
+      this.message = 'user logged in';
       this.authService.setTokenInfo(response);
       this.authService.roleBasedRedirection();
     } else {
@@ -37,27 +42,37 @@ export class LoginComponent implements OnInit {
   }
 
   handleError(info: any): void {
-    if (!info?.loggedIn) {
-      this.errorMessage = info?.message;
-      this.isError = true;
-    }
+    this.message = info?.error?.message;
+    this.loadingAlert = false;
+    this.successAlert = false;
+    this.failAlert = true;
+    this.isVisible = true;
   }
 
-  closeErrorAlert(): void {
-    this.errorMessage = '';
-    this.isError = false;
+  resetValues(values: any): void {
+    this.isVisible = false;
+    this.loadingAlert = false;
+    this.successAlert = false;
+    this.failAlert = false;
   }
+
 
   login(): void {
-    this.isError = false;
     if (this.loginForm.valid) {
+      this.isVisible = true;
+      this.loadingAlert = true;
+      this.failAlert = false;
+      this.message = 'trying to login...';
       this.authService.login(this.loginForm.value as User).subscribe(
         (response) => this.handleLogin(response),
         (err) => this.handleError(err),
       );
     } else {
-      this.errorMessage = 'all fields required';
-      this.isError = true;
+      this.message = 'all fields required';
+      this.loadingAlert = false;
+      this.failAlert = true;
+      this.isVisible = true;
+
     }
   }
 }

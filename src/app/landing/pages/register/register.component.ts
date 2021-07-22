@@ -11,37 +11,48 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   isError: boolean = false;
-  errorMessage: string = '';
+  message: string = 'trying to sign up...';
+
+  isVisible: boolean = false;
+  successAlert: boolean = false;
+  loadingAlert: boolean = false;
+  failAlert: boolean = false;  
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private authService: AuthService,
   ) { }
 
   signUpForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     lastName: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', Validators.required],
     password: ['', Validators.required],
     confirmPassword: ['', Validators.required],
   });
 
-  closeErrorAlert(): void {
-    this.isError = false;
-    this.errorMessage = '';
+  resetValues(values: any): void {
+    this.isVisible = false;
+    this.loadingAlert = false;
+    this.successAlert = false;
+    this.failAlert = false;
   }
 
-  handleError(error: any): void {
-    if (!error.loggedIn) {
-      this.isError = true;
-      this.errorMessage = error?.message;
-    }
+  handleError(info: any): void {
+    this.message = info?.error?.message;
+    this.loadingAlert = false;
+    this.successAlert = false;
+    this.failAlert = true;
+    this.isVisible = true;
   }
 
   handleSignUp(response: any): void {
     if (response && response.loggedIn) {
+      this.loadingAlert = false;
+      this.failAlert = false;
+      this.successAlert = true;
+      this.message = 'user signed up';
       this.authService.setTokenInfo(response);
       this.authService.roleBasedRedirection();
     } else {
@@ -51,13 +62,19 @@ export class RegisterComponent implements OnInit {
 
   signUp(): void {
     if (this.signUpForm.valid) {
+      this.isVisible = true;
+      this.loadingAlert = true;
+      this.failAlert = false;
+      this.message = 'trying to signup...';
       this.authService.signUp(this.signUpForm.value as UserToSignup).subscribe(
         response => this.handleSignUp(response),
         error => this.handleError(error),
       );
     } else {
-      this.errorMessage ='all fields required';
-      this.isError = true;
+      this.message = 'all fields required';
+      this.loadingAlert = false;
+      this.failAlert = true;
+      this.isVisible = true;
     }
   }
 
