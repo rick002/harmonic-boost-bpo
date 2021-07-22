@@ -28,4 +28,8 @@ export class CareersService {
     return this.http.post<any>('/api/careers', params, { headers: this.headers });
   }
 
+  getAllSectors(): Observable<any> {
+    return this.http.get<any>('/api/careers/sectors');
+  }
+
 }

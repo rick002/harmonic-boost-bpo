@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CareersService } from 'src/app/careers/services/careers.service';
 import { getDefaultPositionsForm, Position, PositionsForm } from '../../models/positions-form.model';
 
 @Component({
@@ -29,12 +30,16 @@ export class PositionsFormComponent implements OnInit {
     positionjobType: ['', Validators.required],
   });
   
+
   constructor(
     private fb: FormBuilder,
+    private careersService: CareersService,
   ) { }
 
   ngOnInit(): void {
+    this.careersService.getAllSectors().subscribe(response => console.log(JSON.parse(response.sectors)));
   }
+
 
   submit(): void {
     if (this.positionForm.valid) {
