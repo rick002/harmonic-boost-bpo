@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   signUpForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
+    firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phoneNumber: ['', Validators.required],
@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
       this.loadingAlert = true;
       this.failAlert = false;
       this.message = 'trying to signup...';
+      console.log(this.signUpForm.value as UserToSignup);
       this.authService.signUp(this.signUpForm.value as UserToSignup).subscribe(
         response => this.handleSignUp(response),
         error => this.handleError(error),

@@ -1,3 +1,25 @@
-.mt-5 {
-    margin-top: 5rem !important;
+$white-color: #ffffff;
+
+.contact-form {
+    border: none !important;
+    box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08) !important;
+    padding: 40px 25px !important;
+    position: relative !important;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        background: $white-color;
+        width: 96%;
+        opacity: .62;
+        height: 50%;
+        bottom: -10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 3px;
+    }
+    
 }
+
