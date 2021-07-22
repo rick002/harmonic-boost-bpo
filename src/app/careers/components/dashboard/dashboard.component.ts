@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/landing/services/auth.service';
 import { CareersFilter, DEFAULT_FILTERS } from '../../models/careers.model';
 import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR } from '../../models/check-filters.model';
 import { CareersService } from '../../services/careers.service';
@@ -16,8 +17,11 @@ export class DashboardComponent implements OnInit {
   filters: CareersFilter = DEFAULT_FILTERS;
   posts: Array<any> = [];
 
+  isAdmin: boolean = false;
+
   constructor(
     private careersService: CareersService,
+    private authService: AuthService,
   ) { }
 
 
@@ -38,6 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.careersService.getPositions(this.filters).subscribe(
       response => this.handleResponse(response),
       err => this.handleError(err),
