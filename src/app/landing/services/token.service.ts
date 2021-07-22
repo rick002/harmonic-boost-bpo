@@ -23,7 +23,6 @@ export class TokenService {
     let tokenInfo: string | null = '';
     if (isPlatformBrowser(this.platformId)) {
       tokenInfo = localStorage.getItem('auth-info');
-      console.log(tokenInfo);
     }
     
     return tokenInfo ? JSON.parse(tokenInfo) : null;

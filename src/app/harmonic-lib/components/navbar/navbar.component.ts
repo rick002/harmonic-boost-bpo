@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/landing/services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
-  isAdmin: boolean = true;
+  isAdmin: boolean = false;
   userInfo: any = {};
 
   constructor(
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
-    // this.isAdmin = this.authService.isAdmin();
+    this.isAdmin = this.authService.isAdmin();
     this.userInfo = this.authService.getTokenInfo()?.userInfo;
   }
   

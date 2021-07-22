@@ -6,6 +6,17 @@ export interface PositionsForm {
     isRemoveButtonVisible: boolean;
 }
 
+export interface Position {
+    positionTitle: string;
+    positionPublishedDate: string;
+    positionSector: string;
+    positionCompany: string;
+    positionAddress: string;
+    positionCity: string;
+    positionCountry: string;
+    positionjobType: string;
+}
+
 
 export const getDefaultPositionsForm = (): PositionsForm => {
     return {

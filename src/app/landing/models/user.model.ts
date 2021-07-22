@@ -5,9 +5,19 @@ export interface User {
 
 export interface UserToSignup {
     confirmPassword: string;
-    name: string;
+    firstName: string;
     lastName: string;
     phoneNumber: string;
     email: string;
     password: string;
+}
+
+
+export const DEFAULT_FULL_USER: UserToSignup = {
+    confirmPassword: '',
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
 }

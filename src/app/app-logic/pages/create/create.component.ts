@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DEFAULT_FULL_USER, UserToSignup } from 'src/app/landing/models/user.model';
+import { AuthService } from 'src/app/landing/services/auth.service';
 import { PositionsForm } from '../../models/positions-form.model';
 
 @Component({
@@ -15,11 +17,21 @@ export class CreateComponent implements OnInit {
     isRemoveButtonVisible: false,
   };
 
-  username: string = 'julio garcia';
+  userInfo: UserToSignup = DEFAULT_FULL_USER;
+  username: string = 'Admin User';
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+  ) { }
+
+  getFullName(): string {
+    return `${this.userInfo.firstName} ${this.userInfo.lastName}`;
+  }
 
   ngOnInit(): void {
+    this.userInfo = this.authService.getUserInfo();
+    this.username = this.getFullName();
+    console.log(this.userInfo);
   }
 
 }

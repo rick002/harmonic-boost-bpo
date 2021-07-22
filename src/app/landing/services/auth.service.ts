@@ -36,7 +36,7 @@ export class AuthService {
 
   signUp(user: UserToSignup): Observable<any> {
     const params: HttpParams = new HttpParams()
-    .set('firstName', user.name)
+    .set('firstName', user.firstName)
     .set('lastName', user.lastName)
     .set('email', user.email)
     .set('password', user.password)
@@ -46,14 +46,17 @@ export class AuthService {
   }
 
   setTokenInfo(authInfo: any): void {
-    console.log('Setting Token Info: ', authInfo);
     this.tokenService.setAuthInfo(authInfo);
   }
 
   getTokenInfo(): any {
-    console.log('Getting Token Info: ');
     return this.tokenService.getAuthInfo();
   }
+
+  getUserInfo(): UserToSignup {
+    return this.tokenService.getAuthInfo()?.userInfo as UserToSignup;
+  }
+
   isLoggedIn(): boolean {
     return this.tokenService.isTokenNotExpired();
   }
@@ -64,11 +67,13 @@ export class AuthService {
   }
   
   roleBasedRedirection(): void {
+    console.log('Initing roleBasedRedirection(): void');
     const info: any = this.tokenService.getAuthInfo();
     if (info) {
       if (info.userInfo.rol === 'normal') {
         this.router.navigate(['/careers']);
       } else if (info.userInfo.rol === 'admin') {
+        console.log('Navigating to Admin');
         this.router.navigate(['/admin']);
       }
     }
