@@ -1,3 +1,5 @@
 <app-page-title [username]="username"></app-page-title>
 
-<app-positions-form id="careers" [positionsForm]="positionsForm"></app-positions-form>
+<app-positions-form id="careers" [isVisible]="isVisible" [loadingAlert]="loadingAlert" [successAlert]="successAlert"
+    [failAlert]="failAlert" [message]="message" (exec)="createPosition($event)" [positionsForm]="positionsForm">
+</app-positions-form>

@@ -9,7 +9,7 @@ import { CareersFilter } from '../models/careers.model';
 export class CareersService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
-  })
+  });
 
   constructor(
     private http: HttpClient,

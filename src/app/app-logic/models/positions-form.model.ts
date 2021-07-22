@@ -7,8 +7,9 @@ export interface PositionsForm {
 }
 
 export interface Position {
+    positionId?: string;
     positionTitle: string;
-    positionPublishedDate: string;
+    positionPublishedDate?: string;
     positionSector: string;
     positionCompany: string;
     positionAddress: string;
@@ -16,7 +17,6 @@ export interface Position {
     positionCountry: string;
     positionjobType: string;
 }
-
 
 export const getDefaultPositionsForm = (): PositionsForm => {
     return {

@@ -5,50 +5,54 @@
                 <div class="single-blog-post">
                     <div class="blog-post-content">
                         <div id="comments" class="comments-area">
+                            <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
+                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
+                            </app-alert>
                             <div id="respond" class="comment-respond">
                                 <h3 class="comment-reply-title">{{ positionsForm.title | titlecase }}</h3>
-                                <form id="commentform" class="comment-form">
+                                <form [formGroup]="positionForm" (ngSubmit)="submit()" id="commentform" class="comment-form">
                                     <p class="comment-form-author">
                                         <label for="position" class="col-form-label">Position</label>
-                                        <input id="position" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionTitle" id="position" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
                                     </p>
                                     <p class="comment-form-email">
                                         <label for="company" class="col-form-label">Company</label>
-                                        <input id="company" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionCompany" id="company" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="address" class="col-form-label">Address</label>
-                                        <input id="address" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionAddress" id="address" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="country" class="col-form-label">Country</label>
-                                        <select id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <select formControlName="positionCountry" id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                             <option value="" selected hidden></option>
-                                            <option value="dr">Dominican Republic</option>
+                                            <option value="dominican republic">Dominican Republic</option>
                                         </select>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="city" class="col-form-label">City</label>
-                                        <select id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <select formControlName="positionCity" id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                             <option value="" selected hidden></option>
-                                            <option value="dr">Santo Domingo</option>
+                                            <option value="santo domingo">Santo Domingo</option>
                                         </select>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="sector" class="col-form-label">Sector</label>
-                                        <select id="sector" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <select formControlName="positionSector" id="sector" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                             <option value="" selected hidden></option>
                                             <option value="accounting">Accounting</option>
                                             <option value="automotive">Automotive</option>
+                                            <option value="business services">Business Services</option>
                                         </select>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="job_type" class="col-form-label">Job Type</label>
-                                        <select id="job_type" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <select formControlName="positionjobType" id="job_type" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                             <option value="" selected hidden></option>
-                                            <option value="f-t">Full-Time</option>
-                                            <option value="p-t">Part-Time</option>
-                                            <option value="f">Freelance</option>
+                                            <option value="full-time">Full-Time</option>
+                                            <option value="part-time">Part-Time</option>
+                                            <option value="freelance">Freelance</option>
                                         </select>
         
                                     </p>
@@ -59,12 +63,12 @@
                                         </label>
                                     </div>
                                     <p *ngIf="!positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
-                                        <button type="button" class="btn btn-primary w-50">
+                                        <button type="submit" class="btn btn-primary w-50">
                                             {{ positionsForm.buttonLabel | titlecase }}
                                         </button>
                                     </p>
                                     <p *ngIf="positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
-                                        <button type="button" class="btn btn-danger w-50">
+                                        <button type="submit" class="btn btn-danger w-50">
                                             Remove This Position
                                         </button>
                                     </p>
