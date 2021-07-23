@@ -19,6 +19,11 @@ export class PositionsFormComponent implements OnInit {
   @Input() failAlert: boolean = false;
 
   @Input() message: string = 'executing task...';
+  
+  constructor(
+    private fb: FormBuilder,
+    private careersService: CareersService,
+  ) { }
 
   positionForm: FormGroup = this.fb.group({
     positionTitle: ['', Validators.required],
@@ -29,15 +34,11 @@ export class PositionsFormComponent implements OnInit {
     positionCountry: ['', Validators.required],
     positionjobType: ['', Validators.required],
   });
-  
-
-  constructor(
-    private fb: FormBuilder,
-    private careersService: CareersService,
-  ) { }
 
   ngOnInit(): void {
-    this.careersService.getAllSectors().subscribe(response => console.log(JSON.parse(response.sectors)));
+    this.careersService.getAllSectors().subscribe(
+      response => console.log(response.sectors)
+    );
   }
 
 

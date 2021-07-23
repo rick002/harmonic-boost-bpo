@@ -21,13 +21,13 @@ export class PositionService {
 
   getPositionsAsParams(tdd: Position): HttpParams {
     return new HttpParams()
-      .set('positionTitle', tdd.positionTitle)
-      .set('positionCompany', tdd.positionCompany)
-      .set('positionAddress', tdd.positionAddress)
-      .set('positionCity', tdd.positionCity)
-      .set('positionCountry', tdd.positionCountry)
+      .set('position', tdd.positionTitle)
+      .set('company', tdd.positionCompany)
+      .set('address', tdd.positionAddress)
+      .set('city', tdd.positionCity)
+      .set('country', tdd.positionCountry)
       .set('positionSector', tdd.positionSector)
-      .set('positionjobType', tdd.positionjobType);
+      .set('positionsType', tdd.positionjobType);
   }
 
   createPosition(tdd: Position): Observable<any> {
