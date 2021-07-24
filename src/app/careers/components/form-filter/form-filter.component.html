@@ -15,7 +15,7 @@
                 <label for="sectors" class="col-form-label">Select Sector</label>
                 <select id="sectors" class="form-control form-input-layout" formControlName="sector">
                     <option value="" selected hidden></option>
-                    <option *ngFor="let option of sector">{{option.label | titlecase}}</option>
+                    <option *ngFor="let sector of sectors">{{sector | titlecase}}</option>
                 </select>
             </div>
             <div class="col-auto mt-5">

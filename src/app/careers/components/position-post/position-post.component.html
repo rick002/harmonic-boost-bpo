@@ -32,7 +32,7 @@
                         <button type="button" (click)="cardEvent.emit()" class="btn btn-primary">Apply Now</button>
                     </div>
                     <div class="post-tag" *ngIf="isAdmin">
-                        <button type="button" (click)="openDetails()" class="btn btn-primary">See Details</button>
+                        <button type="button" (click)="openDetails(post.positionId)" class="btn btn-primary">See Details</button>
                     </div>
                     <span routerLink="/blog-details" class="read-more-btn">
                         {{ post.positionjobType | titlecase }}

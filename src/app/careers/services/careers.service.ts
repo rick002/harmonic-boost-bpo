@@ -32,4 +32,5 @@ export class CareersService {
     return this.http.get<any>('/api/careers/sectors');
   }
 
+
 }

@@ -10,12 +10,16 @@ import { CheckFilters } from '../../models/check-filters.model';
 export class FormFilterComponent implements OnInit {
   @Input() sector: Array<CheckFilters> = [];
   @Output() search: EventEmitter<any> = new EventEmitter<any>();
-
+  
+  @Input() sectors: Array<string> = [];
+  
   filterForm: FormGroup = this.fb.group({
     job_title: ['', [Validators.required]],
     state_city_zip: ['', [Validators.required]],
     sector: ['', [Validators.required]],
   });
+
+  
 
   constructor(
     private fb: FormBuilder,

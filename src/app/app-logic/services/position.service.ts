@@ -41,14 +41,14 @@ export class PositionService {
     return this.http.put<any>('/api/position', params, { headers: this.headers });
   }
 
-  getPositionById(positionId: string): void {
+  getPositionById(positionId: string): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({ 'Authorization': this.tokenService.getRawToken() });
-    this.http.get<any>(`/api/position?positionId=${positionId}`, { headers });
+    return this.http.get<any>(`/api/position?positionId=${positionId}`, { headers });
   }
 
-  deletePosition(positionId: string): void {
+  deletePosition(positionId: string): Observable<any> {
     const headers: HttpHeaders = new HttpHeaders({ 'Authorization': this.tokenService.getRawToken() });
-    this.http.delete<any>(`/api/position?positionId=${positionId}`, { headers });
+    return this.http.delete<any>(`/api/position?positionId=${positionId}`, { headers });
   }
 
 }

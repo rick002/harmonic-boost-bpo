@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AppLogicComponent,
     children: [
       { path: '', component: CreateComponent },
-      { path: 'details', component: DetailsComponent },
+      { path: 'details/:positionId', component: DetailsComponent },
       { path: 'manager', component: AdminManagerComponent },
     ],
   },

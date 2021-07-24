@@ -25,25 +25,31 @@
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="country" class="col-form-label">Country</label>
-                                        <select formControlName="positionCountry" id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="countries" formControlName="positionCountry" id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <datalist id="countries">
                                             <option value="" selected hidden></option>
-                                            <option value="dominican republic">Dominican Republic</option>
-                                        </select>
+                                            <option *ngFor="let country of countries" [value]="country">
+                                                {{ country | titlecase }}
+                                            </option>
+                                        </datalist>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="city" class="col-form-label">City</label>
-                                        <select formControlName="positionCity" id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="cities" formControlName="positionCity" id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <datalist id="cities">
                                             <option value="" selected hidden></option>
-                                            <option value="santo domingo">Santo Domingo</option>
-                                        </select>
+                                            <option *ngFor="let city of cities" [value]="city">
+                                                {{ city | titlecase }}
+                                            </option>
+                                        </datalist>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="sector" class="col-form-label">Sector</label>
                                         <select formControlName="positionSector" id="sector" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                             <option value="" selected hidden></option>
-                                            <option value="accounting">Accounting</option>
-                                            <option value="automotive">Automotive</option>
-                                            <option value="business services">Business Services</option>
+                                            <option *ngFor="let sector of sectors" [value]="sector.toLocaleLowerCase()">
+                                                {{ sector | titlecase }}
+                                            </option>
                                         </select>
                                     </p>
                                     <p class="comment-form-url">
@@ -54,7 +60,6 @@
                                             <option value="part-time">Part-Time</option>
                                             <option value="freelance">Freelance</option>
                                         </select>
-        
                                     </p>
                                     <div class="form-check form-switch mb-5" *ngIf="!positionsForm.isCreate">
                                         <input class="form-check-input" [(ngModel)]="positionsForm.isRemoveButtonVisible" name="isRemoveVisible" type="checkbox" id="remove_flag">

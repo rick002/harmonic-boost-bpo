@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 
 import { AppLogicRoutingModule } from './app-logic-routing.module';
 import { AppLogicComponent } from './app-logic.component';
@@ -27,6 +27,7 @@ import { PageTitleComponent } from './components/page-title/page-title.component
     HarmonicLibModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
+  providers: [TitleCasePipe],
 })
 export class AppLogicModule { }

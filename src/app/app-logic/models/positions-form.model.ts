@@ -2,7 +2,7 @@ export interface PositionsForm {
     title: string;
     buttonLabel: string;
     isCreate: boolean;
-    isUpdate: boolean;
+    isDetails: boolean;
     isRemoveButtonVisible: boolean;
 }
 
@@ -18,12 +18,24 @@ export interface Position {
     positionjobType: string;
 }
 
+
+
+export const DEFAULT_POSITION: Position = {
+    positionTitle: '',
+    positionSector: '',
+    positionCompany: '',
+    positionAddress: '',
+    positionCity: '',
+    positionCountry: '',
+    positionjobType: '',
+};
+
 export const getDefaultPositionsForm = (): PositionsForm => {
     return {
         title: '',
         buttonLabel: '',
         isCreate: true,
-        isUpdate: false,
+        isDetails: false,
         isRemoveButtonVisible: false,
     };
 }

@@ -14,7 +14,7 @@ export class CreateComponent implements OnInit {
     title: 'create a new position',
     buttonLabel: 'post this new job',
     isCreate: true,
-    isUpdate: false,
+    isDetails: false,
     isRemoveButtonVisible: false,
   };
 
@@ -43,7 +43,6 @@ export class CreateComponent implements OnInit {
   }
 
   handleResponse(response: any): void {
-    console.log(response);
     this.failAlert = false;
     this.loadingAlert = false;
     this.successAlert = true;
@@ -52,7 +51,6 @@ export class CreateComponent implements OnInit {
   }
 
   handleFailure(info: any): void {
-    console.log(info);
     this.failAlert = true;
     this.loadingAlert = false;
     this.successAlert = false;

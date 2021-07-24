@@ -22,8 +22,8 @@ export class PositionPostComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openDetails(): void {
-    this.router.navigate(['/admin/details']);
+  openDetails(positionId: string): void {
+    this.router.navigate(['/admin/details/', positionId]);
   }
 
 }

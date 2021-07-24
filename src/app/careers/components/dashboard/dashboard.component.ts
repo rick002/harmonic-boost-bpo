@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   posts: Array<any> = [];
 
   isAdmin: boolean = false;
+  
+  sectors: Array<string> = [];
 
   constructor(
     private careersService: CareersService,
@@ -46,6 +48,11 @@ export class DashboardComponent implements OnInit {
       response => this.handleResponse(response),
       err => this.handleError(err),
     );
+
+    this.careersService.getAllSectors().subscribe(
+      response => this.sectors = JSON.parse(response.sectors),
+      err => this.handleError(err),
+    )
   }
 
 }
