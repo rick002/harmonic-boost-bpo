@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Application } from '../../models/applications.model';
 
 @Component({
   selector: 'app-applications-list',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./applications-list.component.scss']
 })
 export class ApplicationsListComponent implements OnInit {
+  @Input() applications: Array<Application> = [];
 
   constructor() { }
 
