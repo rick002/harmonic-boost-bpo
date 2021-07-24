@@ -6,6 +6,7 @@ import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { PreloaderComponent } from './components/preloader/preloader.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
+import { SimpleBannerComponent } from './components/simple-banner/simple-banner.component';
 
 
 
@@ -15,7 +16,8 @@ import { AlertComponent } from './components/alert/alert.component';
     NavbarComponent,
     ErrorPageComponent,
     PreloaderComponent,
-    AlertComponent
+    AlertComponent,
+    SimpleBannerComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +29,7 @@ import { AlertComponent } from './components/alert/alert.component';
     ErrorPageComponent,
     PreloaderComponent,
     AlertComponent,
+    SimpleBannerComponent,
   ]
 })
 export class HarmonicLibModule { }

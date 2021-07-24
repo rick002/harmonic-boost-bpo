@@ -14,17 +14,16 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
-                        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <strong>Sorry</strong> Something went wrong!
-                            <button type="button" class="btn-close" (click)="isError = false" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
+                        <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
+                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
+                        </app-alert>
                         <div class="banner-form">
-                            <form [formGroup]="recoveryForm">
+                            <form [formGroup]="recoveryForm" (ngSubmit)="sendTokenByEmail()">
                                 <div class="form-group">
                                     <label for="email">Please Enter A Valid Email</label>
                                     <input id="email" type="email" class="form-control" formControlName="email">
                                 </div>
-                                <button type="button" routerLink="/password" class="btn btn-primary">Recover Password</button>
+                                <button type="submit" class="btn btn-primary">Recover Password</button>
                             </form>
                         </div>
                     </div>

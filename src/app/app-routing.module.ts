@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule),
   },
   {
+    path: 'applications',
+    loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule),
+  },
+  {
     path: 'careers',
     loadChildren: () => import('./careers/careers.module').then(m => m.CareersModule),
   },

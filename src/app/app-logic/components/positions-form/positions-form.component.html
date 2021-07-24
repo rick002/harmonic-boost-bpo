@@ -27,7 +27,6 @@
                                         <label for="country" class="col-form-label">Country</label>
                                         <input list="countries" formControlName="positionCountry" id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                         <datalist id="countries">
-                                            <option value="" selected hidden></option>
                                             <option *ngFor="let country of countries" [value]="country">
                                                 {{ country | titlecase }}
                                             </option>
@@ -37,7 +36,6 @@
                                         <label for="city" class="col-form-label">City</label>
                                         <input list="cities" formControlName="positionCity" id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
                                         <datalist id="cities">
-                                            <option value="" selected hidden></option>
                                             <option *ngFor="let city of cities" [value]="city">
                                                 {{ city | titlecase }}
                                             </option>
@@ -45,21 +43,21 @@
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="sector" class="col-form-label">Sector</label>
-                                        <select formControlName="positionSector" id="sector" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
-                                            <option value="" selected hidden></option>
+                                        <input list="sectors" formControlName="positionSector" id="sector" class="form-control" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <datalist id="sectors">
                                             <option *ngFor="let sector of sectors" [value]="sector.toLocaleLowerCase()">
                                                 {{ sector | titlecase }}
                                             </option>
-                                        </select>
+                                        </datalist>
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="job_type" class="col-form-label">Job Type</label>
-                                        <select formControlName="positionjobType" id="job_type" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
-                                            <option value="" selected hidden></option>
+                                        <input list="jobType" formControlName="positionjobType" id="job_type" class="form-control" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <datalist id="jobType">
                                             <option value="full-time">Full-Time</option>
                                             <option value="part-time">Part-Time</option>
                                             <option value="freelance">Freelance</option>
-                                        </select>
+                                        </datalist>
                                     </p>
                                     <div class="form-check form-switch mb-5" *ngIf="!positionsForm.isCreate">
                                         <input class="form-check-input" [(ngModel)]="positionsForm.isRemoveButtonVisible" name="isRemoveVisible" type="checkbox" id="remove_flag">

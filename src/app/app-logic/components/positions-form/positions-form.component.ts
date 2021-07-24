@@ -84,9 +84,7 @@ export class PositionsFormComponent implements OnInit {
         response => {
           this.position = response.position as Position;
           this.format(this.position);
-          console.log(this.position);
           this.positionForm.patchValue(this.position);
-          console.log(this.positionForm.value);
         },
         err => console.log(err),
       );
@@ -96,6 +94,8 @@ export class PositionsFormComponent implements OnInit {
 
   submit(): void {
     if (this.positionForm.valid) {
+      const value: Position = this.positionForm.value as Position;
+      value.positionId = this.positionId;
       this.exec.emit(this.positionForm.value as Position);
     } else {
       this.failAlert = true;

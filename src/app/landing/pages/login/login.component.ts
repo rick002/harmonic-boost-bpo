@@ -72,7 +72,6 @@ export class LoginComponent implements OnInit {
       this.loadingAlert = false;
       this.failAlert = true;
       this.isVisible = true;
-
     }
   }
 }

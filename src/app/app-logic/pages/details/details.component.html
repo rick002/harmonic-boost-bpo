@@ -1,2 +1,2 @@
 <app-page-title [username]="username"></app-page-title>
-<app-positions-form [displayForm]="true" [positionId]="positionId" [positionsForm]="positionsForm"></app-positions-form>
+<app-positions-form [displayForm]="true" [positionId]="positionId" [positionsForm]="positionsForm" (exec)="updatePosition($event)"></app-positions-form>
