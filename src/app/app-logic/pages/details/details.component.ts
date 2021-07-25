@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { DEFAULT_FULL_USER, UserToSignup } from 'src/app/landing/models/user.model';
 import { AuthService } from 'src/app/landing/services/auth.service';
 import { DEFAULT_POSITION, Position, PositionsForm } from '../../models/positions-form.model';
@@ -33,13 +34,14 @@ export class DetailsComponent implements OnInit {
   displayForm: boolean = false;
   positionId: string = '';
 
+  alertService: AlertService = new AlertService();
+
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private positionService: PositionService,
   ) { }
-
- 
 
   ngOnInit(): void {
     this.userInfo = this.authService.getUserInfo();
@@ -51,44 +53,35 @@ export class DetailsComponent implements OnInit {
     return `${this.userInfo.firstName} ${this.userInfo.lastName}`;
   }
 
-  handleResponse(response: any): void {
-    this.failAlert = false;
-    this.loadingAlert = false;
-    this.successAlert = true;
-    this.message = response.message || 'action performed';
-    this.isVisible = true;
+  handleUpdateResponse(response: any): void {
+    this.alertService.displaySuccessAlert('position updated');
+    this.router.navigate(['/careers']);
+  }
+  
+  handleDeleteResponse(response: any): void {
+    this.alertService.displaySuccessAlert('position deleted');
+    this.router.navigate(['/careers']);
   }
 
   handleFailure(info: any): void {
-    this.failAlert = true;
-    this.loadingAlert = false;
-    this.successAlert = false;
-    this.message = info?.error?.message || 'there was a problem during this process';
-    this.isVisible = true;
-  
-  }
-
-  displayLoadingAlert(message: string): void {
-    this.loadingAlert = true;
-    this.isVisible = true;
-    this.message = message;
+    this.alertService.displayErrorAlert(info?.error?.message)
   }
 
   updatePosition(position: Position): void {
-    this.displayLoadingAlert('updating position...');
+    this.alertService.displayLoadingAlert('updating position...');
     if (position) {
       this.positionService.editPosition(position).subscribe(
-        response => this.handleResponse(response),
+        response => this.handleUpdateResponse(response),
         err => this.handleFailure(err),
       );
     }
   }
 
   deletePosition(positionId: string): void {
-    this.displayLoadingAlert('deleting position...');
+    this.alertService.displayLoadingAlert('deleting position...');
     if (positionId) {
       this.positionService.deletePosition(positionId).subscribe(
-        response => this.handleResponse(response),
+        response => this.handleDeleteResponse(response),
         err => this.handleFailure(err),
       );
     }

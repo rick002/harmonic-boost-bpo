@@ -1,9 +1,10 @@
 import { TitleCasePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { CareersService } from 'src/app/careers/services/careers.service';
 import { LocationService } from 'src/app/harmonic-lib/services/location.service';
+import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { DEFAULT_POSITION, getDefaultPositionsForm, Position, PositionsForm } from '../../models/positions-form.model';
 import { PositionService } from '../../services/position.service';
 
@@ -19,13 +20,12 @@ export class PositionsFormComponent implements OnInit {
   
   
   @Output() exec: EventEmitter<any> = new EventEmitter<any>();
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input() isVisible: boolean = false;
-  @Input() successAlert: boolean = false;
-  @Input() loadingAlert: boolean = false;
-  @Input() failAlert: boolean = false;
 
-  @Input() message: string = 'executing task...';
+  @Input() alert: AlertService = new AlertService();
+
+
 
   sectors: Array<string> = [];
   countries: Array<string> = [];
@@ -44,38 +44,59 @@ export class PositionsFormComponent implements OnInit {
 
 
   positionForm: FormGroup = this.fb.group({
-    positionTitle: ['', Validators.required],
+    positionTitle: ['',Validators.required],
     positionSector: ['', Validators.required],
     positionCompany: ['', Validators.required],
     positionAddress: ['', Validators.required],
     positionCity: ['', Validators.required],
     positionCountry: ['', Validators.required],
     positionjobType: ['', Validators.required],
+    isRemove: [''],
   });
 
 
 
   ngOnInit(): void {
-    this.careersService.getAllSectors().subscribe(
-      response => this.handleResponse(response),
-      err => this.handleError(err),
-    );
+    this.getAllSectors();
+    this.getAllCountries();
+    this.subscribeToPositionCountry();
+    this.subscribeToIsRemove();
 
-    this.locationSevice.getCountries().subscribe(
-      response => this.countries = JSON.parse(response.countries),
-      err => console.log(err),
-    );
+    if (this.positionsForm.isDetails) {
+      this.getPositionById();
+    }
 
+  }
+
+  subscribeToPositionCountry(): void {
     this.positionForm.get('positionCountry')?.valueChanges.subscribe(
       selected => this.locationSevice.getCities(selected).subscribe(
         response => this.cities = JSON.parse(response.cities),
         err => console.log(err),
       )
     );
+  }
+  
+  subscribeToIsRemove(): void {
+    this.positionForm.get('isRemove')?.valueChanges.subscribe(
+      selected => {
+        this.positionsForm.isRemoveButtonVisible = selected;
+      },
+    );
+  }
+  
+  getAllSectors(): void {
+    this.careersService.getAllSectors().subscribe(
+      response => this.handleResponse(response),
+      err => this.handleError(err),
+    );
+  }
 
-    if (this.positionsForm.isDetails) {
-      this.getPositionById();
-    }
+  getAllCountries(): void {
+    this.locationSevice.getCountries().subscribe(
+      response => this.countries = JSON.parse(response.countries),
+      err => console.log(err),
+    );
   }
 
   getPositionById(): void {
@@ -86,29 +107,28 @@ export class PositionsFormComponent implements OnInit {
           this.format(this.position);
           this.positionForm.patchValue(this.position);
         },
-        err => console.log(err),
+        err => this.alert.displayErrorAlert(err),
       );
     }
   }
 
-
   submit(): void {
     if (this.positionForm.valid) {
-      const value: Position = this.positionForm.value as Position;
-      value.positionId = this.positionId;
-      this.exec.emit(this.positionForm.value as Position);
+      if (!this.positionsForm.isRemoveButtonVisible) {
+        this.createOrEdit();
+      } else {
+        this.delete.emit(this.position.positionId);
+      }
     } else {
-      this.failAlert = true;
-      this.isVisible = true;
-      this.message = 'all fields required';
+      console.log(this.positionForm.value);
+      this.alert.displayErrorAlert('all fields required');
     }
   }
 
-  resetValues(values: any): void {
-    this.isVisible = false;
-    this.loadingAlert = false;
-    this.successAlert = false;
-    this.failAlert = false;
+  createOrEdit(): void {
+    const value: Position = this.positionForm.value as Position;
+    value.positionId = this.positionId;
+    this.exec.emit(this.positionForm.value as Position);
   }
 
   handleResponse(response: any): void {

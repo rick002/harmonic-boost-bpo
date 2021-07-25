@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { DEFAULT_FULL_USER, UserToSignup } from 'src/app/landing/models/user.model';
 import { AuthService } from 'src/app/landing/services/auth.service';
 import { Position, PositionsForm } from '../../models/positions-form.model';
@@ -21,12 +22,8 @@ export class CreateComponent implements OnInit {
   userInfo: UserToSignup = DEFAULT_FULL_USER;
   username: string = 'Admin User';
 
-  isVisible: boolean = false;
-  successAlert: boolean = false;
-  loadingAlert: boolean = false;
-  failAlert: boolean = false;
 
-  message: string = 'executing task...';
+  alertService: AlertService = new AlertService();
 
   constructor(
     private authService: AuthService,
@@ -43,25 +40,15 @@ export class CreateComponent implements OnInit {
   }
 
   handleResponse(response: any): void {
-    this.failAlert = false;
-    this.loadingAlert = false;
-    this.successAlert = true;
-    this.message = response.message || 'position created';
-    this.isVisible = true;
+    this.alertService.displaySuccessAlert('position created');
   }
 
   handleFailure(info: any): void {
-    this.failAlert = true;
-    this.loadingAlert = false;
-    this.successAlert = false;
-    this.message = info?.error?.message || 'there was a problem during the position creation';
-    this.isVisible = true;
+    this.alertService.displayLoadingAlert(info?.error?.message);
   }
 
   createPosition(position: Position): void {
-    this.loadingAlert = true;
-    this.isVisible = true;
-    this.message = 'creating position...';
+    this.alertService.displayLoadingAlert('trying to create this position...');
     if (position) {
       this.positionService.createPosition(position).subscribe(
         response => this.handleResponse(response),

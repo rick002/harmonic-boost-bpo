@@ -14,6 +14,7 @@ export class AlertComponent implements OnInit {
   @Input() warning: boolean = false;
   @Input() success: boolean = false;
   @Input() fail: boolean = false;
+  @Input() w: string = '';
 
   @Output() reset: EventEmitter<any> = new EventEmitter<any>();
 

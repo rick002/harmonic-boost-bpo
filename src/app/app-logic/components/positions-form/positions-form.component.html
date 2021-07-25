@@ -1,31 +1,31 @@
 <section class="ptb-70" style="background-image: url(bg.jpg);">
-    <div class="container" >
+    <div class="container">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-8 col-md-12">
                 <div class="single-blog-post">
                     <div class="blog-post-content">
                         <div id="comments" class="comments-area">
-                            <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
-                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
-                            </app-alert>
+
                             <div id="respond" class="comment-respond">
                                 <h3 class="comment-reply-title">{{ positionsForm.title | titlecase }}</h3>
-                                <form [formGroup]="positionForm" (ngSubmit)="submit()" id="commentform" class="comment-form">
+                                <form [formGroup]="positionForm" (ngSubmit)="submit()" id="commentform"
+                                    class="comment-form">
                                     <p class="comment-form-author">
                                         <label for="position" class="col-form-label">Position</label>
-                                        <input formControlName="positionTitle" id="position" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionTitle" id="position" type="text">
                                     </p>
                                     <p class="comment-form-email">
                                         <label for="company" class="col-form-label">Company</label>
-                                        <input formControlName="positionCompany" id="company" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionCompany" id="company" type="text">
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="address" class="col-form-label">Address</label>
-                                        <input formControlName="positionAddress" id="address" type="text" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input formControlName="positionAddress" id="address" type="text">
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="country" class="col-form-label">Country</label>
-                                        <input list="countries" formControlName="positionCountry" id="country" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="countries" formControlName="positionCountry" id="country"
+                                            class="form-control form-input-layout">
                                         <datalist id="countries">
                                             <option *ngFor="let country of countries" [value]="country">
                                                 {{ country | titlecase }}
@@ -34,7 +34,8 @@
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="city" class="col-form-label">City</label>
-                                        <input list="cities" formControlName="positionCity" id="city" class="form-control form-input-layout" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="cities" formControlName="positionCity" id="city"
+                                            class="form-control form-input-layout">
                                         <datalist id="cities">
                                             <option *ngFor="let city of cities" [value]="city">
                                                 {{ city | titlecase }}
@@ -43,7 +44,8 @@
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="sector" class="col-form-label">Sector</label>
-                                        <input list="sectors" formControlName="positionSector" id="sector" class="form-control" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="sectors" formControlName="positionSector" id="sector"
+                                            class="form-control">
                                         <datalist id="sectors">
                                             <option *ngFor="let sector of sectors" [value]="sector.toLocaleLowerCase()">
                                                 {{ sector | titlecase }}
@@ -52,7 +54,8 @@
                                     </p>
                                     <p class="comment-form-url">
                                         <label for="job_type" class="col-form-label">Job Type</label>
-                                        <input list="jobType" formControlName="positionjobType" id="job_type" class="form-control" [disabled]="positionsForm.isRemoveButtonVisible">
+                                        <input list="jobType" formControlName="positionjobType" id="job_type"
+                                            class="form-control">
                                         <datalist id="jobType">
                                             <option value="full-time">Full-Time</option>
                                             <option value="part-time">Part-Time</option>
@@ -60,23 +63,34 @@
                                         </datalist>
                                     </p>
                                     <div class="form-check form-switch mb-5" *ngIf="!positionsForm.isCreate">
-                                        <input class="form-check-input" [(ngModel)]="positionsForm.isRemoveButtonVisible" name="isRemoveVisible" type="checkbox" id="remove_flag">
+                                        <input class="form-check-input"
+                                            formControlName="isRemove"
+                                            type="checkbox" id="remove_flag">
                                         <label class="form-check-label" for="remove_flag">
-                                                Would you like to remove this position instead?
+                                            Would you like to remove this position instead?
                                         </label>
                                     </div>
-                                    <p *ngIf="!positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
+                                    
+                                    <p *ngIf="!positionsForm.isRemoveButtonVisible"
+                                        class="form-submit d-flex justify-content-center align-items-center">
+                                        
                                         <button type="submit" class="btn btn-primary w-50">
                                             {{ positionsForm.buttonLabel | titlecase }}
                                         </button>
                                     </p>
-                                    <p *ngIf="positionsForm.isRemoveButtonVisible" class="form-submit d-flex justify-content-center align-items-center">
+                                    <p *ngIf="positionsForm.isRemoveButtonVisible"
+                                        class="form-submit d-flex justify-content-center align-items-center">
                                         <button type="submit" class="btn btn-danger w-50">
                                             Remove This Position
                                         </button>
                                     </p>
+                                    <app-alert [message]="alert.message" (reset)="alert.resetValues($event)"
+                                            [isVisible]="alert.isVisible" [success]="alert.successAlert"
+                                            [warning]="alert.loadingAlert" [fail]="alert.failAlert">
+                                    </app-alert>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
