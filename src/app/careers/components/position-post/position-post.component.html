@@ -1,4 +1,5 @@
 <div class="row">
+
     <div class="col-lg-6 col-md-6" *ngFor="let post of savedPosts">
         <div class="single-blog-post">
             <div class="blog-post-content">
@@ -22,17 +23,26 @@
                         </span>
                         <span style="font-size: 13px;">
                             <i class="icofont-google-map"></i>
-                            {{ post.positionAddress	| titlecase }}, 
+                            {{ post.positionAddress | titlecase }},
                             {{ post.positionCity | titlecase }}, {{ post.positionCountry | titlecase }}
                         </span>
                     </p>
                 </blockquote>
                 <div class="d-flex justify-content-between align-items-center">
-                    <div class="post-tag" *ngIf="!isAdmin">
-                        <button type="button" (click)="cardEvent.emit()" class="btn btn-primary">Apply Now</button>
+                    <div class="post-tag" *ngIf="!isAdmin && !post.isApplying && !post.applyFailed">
+                        <button type="button" (click)="applyNow.emit(post.positionId)" class="btn btn-primary">Apply
+                            Now</button>
+                    </div>
+                    <div class="post-tag" *ngIf="!isAdmin && post?.isApplying">
+                        <button type="button"
+                            [class]="post.applyFailed ? 'btn btn-danger':'btn btn-secondary'">
+                            {{ post.applyFailed ? 'Action Failed': 'Please Wait...'}}
+                        </button>
                     </div>
                     <div class="post-tag" *ngIf="isAdmin">
-                        <button type="button" (click)="openDetails(post.positionId)" class="btn btn-primary">See Details</button>
+                        <button type="button" (click)="openDetails(post.positionId)" class="btn btn-primary">Manage
+                            Position
+                        </button>
                     </div>
                     <span routerLink="/blog-details" class="read-more-btn">
                         {{ post.positionjobType | titlecase }}

@@ -8,8 +8,6 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
 import { SimpleBannerComponent } from './components/simple-banner/simple-banner.component';
 
-
-
 @NgModule({
   declarations: [
     FooterComponent,

@@ -11,10 +11,13 @@ import { DEFAULT_POSTS } from '../../models/posts.model';
 export class PositionPostComponent implements OnInit {
   @Input() isAdmin: boolean = false;
   @Input() savedPosts: Array<any> = [];
-  @Output() cardEvent: EventEmitter<any> = new EventEmitter<any>();
+
+
+  @Output() applyNow: EventEmitter<any> = new EventEmitter<any>();
+
 
   posts: Array<any> = DEFAULT_POSTS;
-
+  
   constructor(
     private router: Router,
   ) { }
@@ -26,4 +29,5 @@ export class PositionPostComponent implements OnInit {
     this.router.navigate(['/admin/details/', positionId]);
   }
 
+  
 }

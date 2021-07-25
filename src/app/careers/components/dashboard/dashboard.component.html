@@ -8,15 +8,15 @@
         <div class="row mb-4">
             <div class="col-lg-12 col-md-12 d-flex justify-content-between align-items-center">
                 <span class="h5">
-                    4 Jobs Found
+                    {{posts?.length}} {{posts.length > 1 ? 'Jobs': 'Job'}} Found
                 </span>
-                <a href="#">
+                <a type="button" class="text-primary" (click)="sortByOlder()">
                     <i class="icofont-filter"></i>
-                    Most Recent
+                    Sort By Older
                 </a>
-                <a href="#">
+                <a type="button" class="text-primary" (click)="sortByRecent()">
                     <i class="icofont-filter"></i>
-                    10 Per Page
+                    Sort By Most Recent
                 </a>
             </div>
         </div>
@@ -29,8 +29,13 @@
                 </div>
             </div>
             <div class="col-lg-8 col-md-12">
-                <app-position-post [isAdmin]="isAdmin" [savedPosts]="posts"></app-position-post>
-                <app-pagination-area></app-pagination-area>
+                <app-alert [message]="alertService.message" (reset)="alertService.resetValues($event)"
+                    [isVisible]="alertService.isVisible" [success]="alertService.successAlert"
+                    [warning]="alertService.loadingAlert" [fail]="alertService.failAlert">
+                </app-alert>
+                <app-position-post (applyNow)="applyNow($event)"
+                    [isAdmin]="isAdmin" [savedPosts]="posts">
+                </app-position-post>
             </div>
         </div>
     </div>

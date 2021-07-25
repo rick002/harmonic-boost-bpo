@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { CareersFilter } from '../models/careers.model';
 
 @Injectable({
@@ -28,6 +28,9 @@ export class CareersService {
     return this.http.post<any>('/api/careers', params, { headers: this.headers });
   }
 
+  applyNow(): Observable<any> {
+    return of({});
+  }
   getAllSectors(): Observable<any> {
     return this.http.get<any>('/api/careers/sectors');
   }
