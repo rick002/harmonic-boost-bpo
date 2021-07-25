@@ -37,20 +37,32 @@ export class AdminManagerComponent implements OnInit {
     this.alert.displayErrorAlert(info.error.message);
   }
 
-  submit(): void {
-    this.alert.displayLoadingAlert('loading...');
-    if (this.roleManagerForm.valid) {
-      const roleInfo: RolesManager = { token: '', email: '', role: '', };
-      roleInfo.email = this.roleManagerForm.value.email;
+  notTheSameUser(email: string): boolean {
+    const user = this.adminManagerService.getUserInfo();
+    return (user && user.email) !== email ? true : false;
+  }
+
+  updateRole(): void {
+    const roleInfo: RolesManager = { token: '', email: '', role: '', };
+    roleInfo.email = this.roleManagerForm.value.email;
+    if (this.notTheSameUser(roleInfo.email)) {
       roleInfo.role = this.downgrade ? 'normal' : 'admin';
       this.adminManagerService.updateRole(roleInfo).subscribe(
         response => this.handleResponse(),
         err => this.handleFailure(err),
       );
     } else {
+      this.alert.displayErrorAlert('you can not downgrade yourself');
+    }
+  }
+
+  submit(): void {
+    this.alert.displayLoadingAlert('loading...');
+    if (this.roleManagerForm.valid) {
+      this.updateRole();
+    } else {
       this.alert.displayErrorAlert('email field requied');
     }
-    console.log(this.roleManagerForm.value);
   }
 
 }

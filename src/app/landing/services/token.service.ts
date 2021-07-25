@@ -24,13 +24,11 @@ export class TokenService {
     if (isPlatformBrowser(this.platformId)) {
       tokenInfo = localStorage.getItem('auth-info');
     }
-    
     return tokenInfo ? JSON.parse(tokenInfo) : null;
   }
 
   removeAuthInfo(): void {
     if (this.isToken() && isPlatformBrowser(this.platformId)) {
-      console.log('<Remove Auth Token Method> -> There is a token to remove');
       localStorage.removeItem('auth-info');
     }
   }
@@ -44,7 +42,6 @@ export class TokenService {
   getRawToken(): string {
     if (this.isToken()) {
       const rawToken: string = this.getAuthInfo()?.token;
-      console.log('Raw Token', rawToken);
       return rawToken;
     }
     return '';
@@ -55,7 +52,6 @@ export class TokenService {
       const service: JwtHelperService = new JwtHelperService();
       const authInfo: any = this.getAuthInfo();
       const decodedToken: any = service.decodeToken(authInfo.token);
-      console.log('Decoded Token: ', decodedToken);
       return decodedToken;
     }
     return null;
@@ -66,13 +62,9 @@ export class TokenService {
       const rawToken: any = this.getRawToken();
       const service: JwtHelperService = new JwtHelperService();
       const isExpired: boolean = service.isTokenExpired(rawToken);
-      console.log('Is Token Expired: ', isExpired);
       return !isExpired;
     }
-    console.log('There is no token at all');
     return false;
   }
-
- 
 
 }

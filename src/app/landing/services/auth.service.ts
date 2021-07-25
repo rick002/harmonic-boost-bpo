@@ -15,8 +15,6 @@ export class AuthService {
      'Content-Type': 'application/x-www-form-urlencoded' 
   });
 
-  
-
   constructor(
     private http: HttpClient,
     private tokenService: TokenService,
@@ -67,13 +65,11 @@ export class AuthService {
   }
   
   roleBasedRedirection(): void {
-    console.log('Initing roleBasedRedirection(): void');
     const info: any = this.tokenService.getAuthInfo();
     if (info) {
       if (info.userInfo.rol === 'normal') {
         this.router.navigate(['/careers']);
       } else if (info.userInfo.rol === 'admin') {
-        console.log('Navigating to Admin');
         this.router.navigate(['/admin']);
       }
     }
