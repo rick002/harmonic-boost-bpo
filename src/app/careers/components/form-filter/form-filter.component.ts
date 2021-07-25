@@ -19,15 +19,16 @@ export class FormFilterComponent implements OnInit {
     sector: ['', [Validators.required]],
   });
 
-  
-
   constructor(
     private fb: FormBuilder,
   ) { }
 
   doSearch(): void {
     if (this.filterForm.valid) {
-      this.search.emit(this.filterForm.valid);
+      this.search.emit(this.filterForm.value);
+      window.alert('emitting');
+    } else {
+      console.log('Is Invalid');
     }
   }
 

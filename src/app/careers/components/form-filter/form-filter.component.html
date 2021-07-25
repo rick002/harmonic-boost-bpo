@@ -1,28 +1,30 @@
 <div class="single-blog-post">
     <div class="blog-post-content">
-        <div [formGroup]="filterForm" (ngSubmit)="doSearch()" class="row g-3 d-flex justify-content-around align-items-center">
-            <div class="col-auto">
-                <label for="job_title" class="col-form-label">Job Title, Keyword or Phrase</label>
-                <input type="text" id="job_title" class="form-control form-input-layout"
-                    aria-describedby="passwordHelpInline" formControlName="job_title">
+        <form [formGroup]="filterForm" (ngSubmit)="doSearch()">
+            <div class="row g-3 d-flex justify-content-around align-items-center">
+                <div class="col-auto">
+                    <label for="job_title" class="col-form-label">Job Title, Keyword or Phrase</label>
+                    <input type="text" id="job_title" class="form-control form-input-layout"
+                        aria-describedby="passwordHelpInline" formControlName="job_title">
+                </div>
+                <div class="col-auto">
+                    <label for="state_city_zip" class="col-form-label">State, City or ZIP</label>
+                    <input type="text" id="state_city_zip" class="form-control form-input-layout"
+                        aria-describedby="passwordHelpInline" formControlName="state_city_zip">
+                </div>
+                <div class="col-auto">
+                    <label for="sectors" class="col-form-label">Select Sector</label>
+                    <select id="sectors" class="form-control form-input-layout" formControlName="sector">
+                        <option value="" selected hidden></option>
+                        <option *ngFor="let sector of sectors">{{sector | titlecase}}</option>
+                    </select>
+                </div>
+                <div class="col-auto mt-5">
+                    <button type="submit" class="btn btn-primary search-button">
+                        <i class="icofont-search"></i>
+                    </button>
+                </div>
             </div>
-            <div class="col-auto">
-                <label for="state_city_zip" class="col-form-label">State, City or ZIP</label>
-                <input type="text" id="state_city_zip" class="form-control form-input-layout"
-                    aria-describedby="passwordHelpInline" formControlName="state_city_zip">
-            </div>
-            <div class="col-auto">
-                <label for="sectors" class="col-form-label">Select Sector</label>
-                <select id="sectors" class="form-control form-input-layout" formControlName="sector">
-                    <option value="" selected hidden></option>
-                    <option *ngFor="let sector of sectors">{{sector | titlecase}}</option>
-                </select>
-            </div>
-            <div class="col-auto mt-5">
-                <button type="submit" class="btn btn-primary search-button">
-                    <i class="icofont-search"></i>
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

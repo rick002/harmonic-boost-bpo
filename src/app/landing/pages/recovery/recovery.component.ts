@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
 @Component({
@@ -9,15 +10,8 @@ import { PasswordRecoveryService } from '../../services/password-recovery.servic
   styleUrls: ['./recovery.component.scss']
 })
 export class RecoveryComponent implements OnInit {
+  alert: AlertService = new AlertService();
   
-
-  isVisible: boolean = false;
-  successAlert: boolean = false;
-  loadingAlert: boolean = false;
-  failAlert: boolean = false;
-
-  message: string = 'sending recovery email...';
-
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -28,36 +22,12 @@ export class RecoveryComponent implements OnInit {
     email: ['', Validators.required],
   });
 
-
-
   ngOnInit(): void {
-  }
-
-  resetValues(values: any): void {
-    this.isVisible = false;
-    this.loadingAlert = false;
-    this.successAlert = false;
-    this.failAlert = false;
-  }
-
-  displayLoadingAlert(): void {
-    this.isVisible = true;
-    this.loadingAlert = true;
-    this.failAlert = false;
-    this.successAlert = false;
-  }
-
-  displaySuccessAlert(): void {
-    this.loadingAlert = false;
-    this.failAlert = false;
-    this.successAlert = true;
-    this.isVisible = true;
-    this.message = 'recovery sent';
   }
 
   sendTokenByEmail(): void {
     if (this.recoveryForm.valid) {
-      this.displayLoadingAlert();
+      this.alert.displayLoadingAlert('sending recovery email');
       this.passwordRecoveryService.sendRecoveryEmail(this.recoveryForm.value).subscribe(
         response => this.openUpdatePassword(),
         err => this.handleError(err),
@@ -66,16 +36,13 @@ export class RecoveryComponent implements OnInit {
   }
 
   openUpdatePassword(): void {
-    this.displaySuccessAlert();
+    this.alert.displaySuccessAlert('recovery email sent');
     this.router.navigate(['/password']);
   }
 
   handleError(info: any): void {
-    this.message = info?.error?.message;
-    this.loadingAlert = false;
-    this.successAlert = false;
-    this.failAlert = true;
-    this.isVisible = true;
+    this.alert.displayErrorAlert(info?.error?.message || 'action failed');
+    
   }
 
 }

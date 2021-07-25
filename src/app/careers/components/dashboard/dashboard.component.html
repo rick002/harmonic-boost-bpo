@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col-lg-12 col-md-12 mx-auto my-2">
-                <app-form-filter [sectors]="sectors" [sector]="sector"></app-form-filter>
+                <app-form-filter [sectors]="sectors" (search)="filterPositionsByForm($event)"></app-form-filter>
             </div>
         </div>
         <div class="row mb-4">

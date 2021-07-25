@@ -14,8 +14,8 @@
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-12 offset-lg-1 offset-md-0">
-                        <app-alert [message]="message" (reset)="resetValues($event)" [isVisible]="isVisible"
-                            [success]="successAlert" [warning]="loadingAlert" [fail]="failAlert">
+                        <app-alert [message]="alert.message" (reset)="alert.resetValues($event)" [isVisible]="alert.isVisible"
+                            [success]="alert.successAlert" [warning]="alert.loadingAlert" [fail]="alert.failAlert">
                         </app-alert>
                         <div class="banner-form">
                             <form [formGroup]="recoveryForm" (ngSubmit)="sendTokenByEmail()">

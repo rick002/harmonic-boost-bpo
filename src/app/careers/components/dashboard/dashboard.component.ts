@@ -4,9 +4,8 @@ import { AuthService } from 'src/app/landing/services/auth.service';
 import { CareersFilter, DEFAULT_FILTERS } from '../../models/careers.model';
 import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR } from '../../models/check-filters.model';
 import { CareersService } from '../../services/careers.service';
-import * as moment from 'moment';
 import { Router } from '@angular/router';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -92,20 +91,40 @@ export class DashboardComponent implements OnInit {
       err => this.handleApplyNowError({ err, clickedPosition }),
     );
   }
-  
-  ngOnInit(): void {
-    this.alertService.displayLoadingAlert('loading positions...');
-    this.isAdmin = this.authService.isAdmin();
 
+  getPositions(): void {
     this.careersService.getPositions(this.filters).subscribe(
       response => this.handlePositionsResponse(response),
       err => this.handlePositionError(err),
     );
+  }
+  
+  filterPositionsByForm(formFilter: any): void {
+    this.filters.searchTitle = formFilter.job_title;
+    this.filters.location = formFilter.state_city_zip;
+    this.filters.sectorCat = formFilter.sector;
+    this.getPositions();
+  }
 
+  filterPositionsByChecks(formFilter: any): void {
+    this.filters.jobType = formFilter.jobType;
+    this.filters.posted = formFilter.posted;
+    this.filters.sectorCat = formFilter.sector;
+    this.getPositions();
+  }
+
+  getAllSectors(): void {
     this.careersService.getAllSectors().subscribe(
       response => this.sectors = JSON.parse(response.sectors),
       err => this.handlePositionError(err),
     );
+  }
+  
+  ngOnInit(): void {
+    this.alertService.displayLoadingAlert('loading positions...');
+    this.isAdmin = this.authService.isAdmin();
+    this.getAllSectors();
+    this.getPositions();
   }
 
 }
