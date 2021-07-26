@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { NonAuthGuard } from './guards/non-auth.guard';
+import { NotAdminGuard } from './guards/not-admin.guard';
 import { ErrorPageComponent } from './harmonic-lib/pages/error-page/error-page.component';
 
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'applications',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, NotAdminGuard],
     loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule),
   },
   {

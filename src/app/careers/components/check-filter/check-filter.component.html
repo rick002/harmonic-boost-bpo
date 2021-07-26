@@ -4,11 +4,10 @@
     </h3>
     <ul style="list-style: none;">
         <form>
-            <li *ngFor="let option of options">
-                <input type="checkbox" class="me-1 form-check-input">
+            <li *ngFor="let option of options; index as i">
+                <input type="checkbox" class="me-1 form-check-input" (click)="filterByCheck(i)" [ngModel]="option.value" [name]="option.label">
                 {{ option?.label | titlecase}}
             </li>
         </form>
     </ul>
-    
 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { AuthService } from 'src/app/landing/services/auth.service';
 import { CareersFilter, DEFAULT_FILTERS } from '../../models/careers.model';
-import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR } from '../../models/check-filters.model';
+import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR, loadSectorsInChecks } from '../../models/check-filters.model';
 import { CareersService } from '../../services/careers.service';
 import { Router } from '@angular/router';
 import { ApplicationsService } from 'src/app/applications/services/applications.service';
@@ -71,8 +71,9 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  handlePositionError(err: any): void {
-    this.alertService.displayErrorAlert(err);
+  handlePositionError(info: any): void {
+    this.alertService.displayErrorAlert(info.error.message);
+    setTimeout(() => this.alertService.hide(), 3000);
   }
 
   resetApplyButton(clickedPosition: any): void {
@@ -115,6 +116,18 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getAllSectors(): void {
+    this.careersService.getAllSectors().subscribe(
+      response => this.handleGetAllSectorsResponse(response),
+      err => this.handlePositionError(err),
+    );
+  }
+
+  handleGetAllSectorsResponse(response: any): void {
+    this.sectors = JSON.parse(response.sectors);
+    loadSectorsInChecks(this.sectors);
+  }
+
   filterPositionsByForm(formFilter: any): void {
     this.filters.searchTitle = formFilter.job_title;
     this.filters.location = formFilter.state_city_zip;
@@ -122,18 +135,19 @@ export class DashboardComponent implements OnInit {
     this.getPositions();
   }
 
-  filterPositionsByChecks(formFilter: any): void {
-    this.filters.jobType = formFilter.jobType;
-    this.filters.posted = formFilter.posted;
-    this.filters.sectorCat = formFilter.sector;
+  filterByPosted(checkbox: CheckFilters): void {
+    this.filters.posted = checkbox.param.toLowerCase();
     this.getPositions();
   }
 
-  getAllSectors(): void {
-    this.careersService.getAllSectors().subscribe(
-      response => this.sectors = JSON.parse(response.sectors),
-      err => this.handlePositionError(err),
-    );
+  filterByJobType(checkbox: CheckFilters): void {
+    this.filters.jobType = checkbox.param.toLowerCase();
+    this.getPositions();
+  }
+
+  filterBySectorCat(checkbox: CheckFilters): void {
+    this.filters.sectorCat = checkbox.param.toLowerCase();
+    this.getPositions();
   }
 
   ngOnInit(): void {

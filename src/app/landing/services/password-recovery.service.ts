@@ -28,5 +28,4 @@ export class PasswordRecoveryService {
     return this.http.post<any>('/api/update_password', params, { headers: this.headers });
   }
 
-
 }

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DEFAULT_POSTS } from '../../models/posts.model';
 
 
 @Component({
@@ -14,9 +13,6 @@ export class PositionPostComponent implements OnInit {
 
 
   @Output() applyNow: EventEmitter<any> = new EventEmitter<any>();
-
-
-  posts: Array<any> = DEFAULT_POSTS;
   
   constructor(
     private router: Router,
@@ -28,6 +24,5 @@ export class PositionPostComponent implements OnInit {
   openDetails(positionId: string): void {
     this.router.navigate(['/admin/details/', positionId]);
   }
-
   
 }

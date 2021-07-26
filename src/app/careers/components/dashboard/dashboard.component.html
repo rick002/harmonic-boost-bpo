@@ -23,9 +23,9 @@
         <div class="row">
             <div class="col-lg-3 col-md-12">
                 <div class="sidebar">
-                    <app-check-filter [options]="datePosted" title="date posted"></app-check-filter>
-                    <app-check-filter [options]="jobType" title="job type"></app-check-filter>
-                    <app-check-filter [options]="sector" title="sector"></app-check-filter>
+                    <app-check-filter (filterByChecks)="filterByPosted($event)" [options]="datePosted" title="date posted"></app-check-filter>
+                    <app-check-filter (filterByChecks)="filterByJobType($event)" [options]="jobType" title="job type"></app-check-filter>
+                    <app-check-filter (filterByChecks)="filterBySectorCat($event)" [options]="sector" title="sector"></app-check-filter>
                 </div>
             </div>
             <div class="col-lg-8 col-md-12">
