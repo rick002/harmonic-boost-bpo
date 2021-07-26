@@ -8,7 +8,7 @@ import { HarmonicLibModule } from './harmonic-lib/harmonic-lib.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

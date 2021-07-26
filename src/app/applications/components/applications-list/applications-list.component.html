@@ -10,39 +10,39 @@
                 <div class="faq-accordion accordion" id="faqAccordion">
                     <div class="accordion-item" *ngFor="let application of applications">
                         <div class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+application.applicationId" aria-expanded="true" [attr.aria-controls]="application.applicationId">
-                                {{ application.applicationTitle | titlecase}} <i class="icofont-dotted-down"></i>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#'+application.positionId" aria-expanded="true" [attr.aria-controls]="application.positionId">
+                                {{ application.positionTitle | titlecase}} <i class="icofont-dotted-down"></i>
                             </button>
                         </div>
-                        <div [id]="application.applicationId" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div [id]="application.positionId" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
                                 <ul>
                                     <li>
                                         <span class="fw-bold">Application Date</span>
                                         <i class="icofont-long-arrow-right mx-1"></i>
-                                        <span style="font-size: 14px;">{{ application.applicationDate | titlecase }}</span>
+                                        <span style="font-size: 14px;">{{ application.postitionApplicationDate | titlecase }}</span>
                                     </li>
                                     <li>
                                         <span class="fw-bold">Company</span>
                                         <i class="icofont-long-arrow-right mx-1"></i>
-                                        <span style="font-size: 14px;">{{ application.applicationCompany | titlecase }}</span>
+                                        <span style="font-size: 14px;">{{ application.positionCompany | titlecase }}</span>
                                     </li>
                                     <li>
                                         <span class="fw-bold">Full Address</span>
                                         <i class="icofont-long-arrow-right mx-1"></i>
                                         <span style="font-size: 14px;">
-                                           {{ application.applicationAddress | titlecase}}
+                                           {{ application.positionAddress | fullAddress: application.positionCity: application.positionCountry | titlecase}}
                                         </span>
                                     </li>
                                     <li>
                                         <span class="fw-bold">Sector</span>
                                         <i class="icofont-long-arrow-right mx-1"></i>
-                                        <span style="font-size: 14px;">{{ application.applicationSector | titlecase }}</span>
+                                        <span style="font-size: 14px;">{{ application.positionSector | titlecase }}</span>
                                     </li>
                                     <li>
                                         <span class="fw-bold">Job Type</span>
                                         <i class="icofont-long-arrow-right mx-1"></i>
-                                        <span style="font-size: 14px;">{{ application.applicationJobType | titlecase }}</span>
+                                        <span style="font-size: 14px;">{{ application.positionjobType | titlecase }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </section>

@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { AuthService } from 'src/app/landing/services/auth.service';
 import { CareersFilter, DEFAULT_FILTERS } from '../../models/careers.model';
 import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR } from '../../models/check-filters.model';
 import { CareersService } from '../../services/careers.service';
 import { Router } from '@angular/router';
+import { ApplicationsService } from 'src/app/applications/services/applications.service';
 import * as moment from 'moment';
 
 @Component({
@@ -27,6 +28,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private careersService: CareersService,
+    private applicationsService: ApplicationsService,
     private authService: AuthService,
     private router: Router,
   ) { }
@@ -43,11 +45,21 @@ export class DashboardComponent implements OnInit {
       (postBefore, postNext) =>
         moment(postNext.positionPublishedDatee).valueOf() - moment(postBefore.positionPublishedDate).valueOf()
     );
-   }
+  }
+
+  filterIfUserIsLoggedIn(positions: Array<any>): void {
+    if (this.authService.isLoggedIn()) {
+      this.applicationsService.getSavedPositionsByUser().subscribe(
+        response =>
+          this.posts = this.applicationsService.filterSavedPositions(positions, response.positions),
+      )
+    }
+  }
 
   handlePositionsResponse(response: any): void {
     this.alertService.hide();
     this.posts = response.positions;
+    this.filterIfUserIsLoggedIn(this.posts);
     this.posts.forEach(
       post => {
         post.positionCompany = post.positionCompany.replace(',', '');
@@ -73,10 +85,10 @@ export class DashboardComponent implements OnInit {
       this.router.navigate(['/applications']);
       this.resetApplyButton(clickedPosition);
     }, 2000);
-    
+
   }
 
-  handleApplyNowError({err, clickedPosition}: any): void {
+  handleApplyNowError({ err, clickedPosition }: any): void {
     clickedPosition.applyFailed = true;
     setTimeout(() => {
       this.resetApplyButton(clickedPosition);
@@ -84,12 +96,16 @@ export class DashboardComponent implements OnInit {
   }
 
   applyNow(positionId: string): void {
-    const clickedPosition: any = this.posts.find(position => position.positionId === positionId);
-    clickedPosition.isApplying = true;
-    this.careersService.applyNow().subscribe(
-      response => this.handleApplyNowResponse({ response, clickedPosition }),
-      err => this.handleApplyNowError({ err, clickedPosition }),
-    );
+    if (this.authService.isLoggedIn()) {
+      const clickedPosition: any = this.posts.find(position => position.positionId === positionId);
+      clickedPosition.isApplying = true;
+      this.careersService.applyNow(positionId).subscribe(
+        response => this.handleApplyNowResponse({ response, clickedPosition }),
+        err => this.handleApplyNowError({ err, clickedPosition }),
+      );
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   getPositions(): void {
@@ -98,7 +114,7 @@ export class DashboardComponent implements OnInit {
       err => this.handlePositionError(err),
     );
   }
-  
+
   filterPositionsByForm(formFilter: any): void {
     this.filters.searchTitle = formFilter.job_title;
     this.filters.location = formFilter.state_city_zip;
@@ -119,7 +135,7 @@ export class DashboardComponent implements OnInit {
       err => this.handlePositionError(err),
     );
   }
-  
+
   ngOnInit(): void {
     this.alertService.displayLoadingAlert('loading positions...');
     this.isAdmin = this.authService.isAdmin();

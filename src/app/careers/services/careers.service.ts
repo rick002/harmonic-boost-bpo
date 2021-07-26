@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { TokenService } from 'src/app/landing/services/token.service';
 import { CareersFilter } from '../models/careers.model';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class CareersService {
 
   constructor(
     private http: HttpClient,
+    private tokenService: TokenService,
   ) { }
 
   getPositions(filters: CareersFilter): Observable<any> {
@@ -28,12 +30,16 @@ export class CareersService {
     return this.http.post<any>('/api/careers', params, { headers: this.headers });
   }
 
-  applyNow(): Observable<any> {
-    return of({});
+  applyNow(positionId: string): Observable<any> {
+    const params: HttpParams = new HttpParams()
+    .set('positionId', positionId)
+    .set('token', this.tokenService.getRawToken());
+    this.headers.set('Authorization', this.tokenService.getRawToken());
+    return this.http.post<any>('/api/saveposition', params, { headers: this.headers });
   }
+
   getAllSectors(): Observable<any> {
     return this.http.get<any>('/api/careers/sectors');
   }
-
 
 }

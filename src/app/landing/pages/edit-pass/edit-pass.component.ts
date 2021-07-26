@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PasswordRecoveryService } from '../../services/password-recovery.service';
 
 @Component({
@@ -14,9 +15,10 @@ export class EditPassComponent implements OnInit {
   failAlert: boolean = false;
 
   message: string = 'sending recovery email...';
-  
+
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private passwordRecoverySerivce: PasswordRecoveryService,
   ) { }
 
@@ -74,11 +76,11 @@ export class EditPassComponent implements OnInit {
 
   handleResponse(response: any): void {
     this.displaySuccessAlert('password updated');
+    setTimeout(() => this.router.navigate(['/login']), 2000);
   }
 
   handleError(info: any): void {
     this.displayErrorAlert(info?.error?.message);
   }
-
 
 }

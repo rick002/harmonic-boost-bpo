@@ -8,17 +8,17 @@ import { Observable } from 'rxjs';
 export class PasswordRecoveryService {
 
   headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded' 
+    'Content-Type': 'application/x-www-form-urlencoded'
  });
 
 
   constructor(
     private http: HttpClient,
   ) { }
-  
+
   sendRecoveryEmail({ email }: any): Observable<any> {
     const params: HttpParams = new HttpParams().set('email', email);
-    return this.http.post<any>('/api/password_recovery', params, { headers: this.headers });
+    return this.http.post<any>('/api/password/recovery', params, { headers: this.headers });
   }
 
   changePassword(tdd: any): Observable<any> {

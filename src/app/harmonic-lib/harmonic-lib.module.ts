@@ -7,6 +7,7 @@ import { PreloaderComponent } from './components/preloader/preloader.component';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
 import { SimpleBannerComponent } from './components/simple-banner/simple-banner.component';
+import { FullAddressPipe } from './pipes/full-address.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SimpleBannerComponent } from './components/simple-banner/simple-banner.
     ErrorPageComponent,
     PreloaderComponent,
     AlertComponent,
-    SimpleBannerComponent
+    SimpleBannerComponent,
+    FullAddressPipe
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { SimpleBannerComponent } from './components/simple-banner/simple-banner.
     PreloaderComponent,
     AlertComponent,
     SimpleBannerComponent,
+    FullAddressPipe,
   ]
 })
 export class HarmonicLibModule { }
