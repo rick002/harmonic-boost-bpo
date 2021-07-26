@@ -23,7 +23,7 @@
                      </span>
                 </li>
                 <li class="nav-item"><a class="nav-link" routerLink='/careers'>Careers</a></li>
-                <li *ngIf="!isAdmin" class="nav-item"><a class="nav-link" routerLink="/applications">My  Applications</a></li>
+                <li *ngIf="!isAdmin && isLoggedIn" class="nav-item"><a class="nav-link" routerLink="/applications">My  Applications</a></li>
                 <ng-container *ngIf="isAdmin">
                     <li class="nav-item"><a class="nav-link" routerLink="/admin">New Position</a></li>
                     <li class="nav-item"><a class="nav-link" routerLink="/admin/manager">Manager</a></li>
