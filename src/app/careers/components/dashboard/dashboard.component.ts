@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/harmonic-lib/utils/alert.util';
 import { AuthService } from 'src/app/landing/services/auth.service';
 import { CareersFilter, DEFAULT_FILTERS } from '../../models/careers.model';
-import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR, loadSectorsInChecks } from '../../models/check-filters.model';
+import { CheckFilters, DATE_POSTED, JOB_TYPE, SECTOR, loadSectorsInChecks, parsePosted } from '../../models/check-filters.model';
 import { CareersService } from '../../services/careers.service';
 import { Router } from '@angular/router';
 import { ApplicationsService } from 'src/app/applications/services/applications.service';
@@ -57,7 +57,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handlePositionsResponse(response: any): void {
-    this.alertService.hide();
+    this.alertService.displaySuccessAlert('information loaded');
+    setTimeout(() => this.alertService.hide(), 1000);
     this.posts = response.positions;
     this.filterIfUserIsLoggedIn(this.posts);
     this.posts.forEach(
@@ -110,6 +111,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getPositions(): void {
+    this.alertService.displayLoadingAlert('loading information...');
     this.careersService.getPositions(this.filters).subscribe(
       response => this.handlePositionsResponse(response),
       err => this.handlePositionError(err),
@@ -125,7 +127,7 @@ export class DashboardComponent implements OnInit {
 
   handleGetAllSectorsResponse(response: any): void {
     this.sectors = JSON.parse(response.sectors);
-    loadSectorsInChecks(this.sectors);
+    this.sector = loadSectorsInChecks(this.sectors);
   }
 
   filterPositionsByForm(formFilter: any): void {
@@ -137,6 +139,7 @@ export class DashboardComponent implements OnInit {
 
   filterByPosted(checkbox: CheckFilters): void {
     this.filters.posted = checkbox.param.toLowerCase();
+    this.filters.posted = parsePosted(checkbox);
     this.getPositions();
   }
 

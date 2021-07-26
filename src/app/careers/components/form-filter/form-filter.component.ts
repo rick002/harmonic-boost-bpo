@@ -24,12 +24,7 @@ export class FormFilterComponent implements OnInit {
   ) { }
 
   doSearch(): void {
-    if (this.filterForm.valid) {
-      this.search.emit(this.filterForm.value);
-      window.alert('emitting');
-    } else {
-      console.log('Is Invalid');
-    }
+    this.search.emit(this.filterForm.value);
   }
 
   ngOnInit(): void {
