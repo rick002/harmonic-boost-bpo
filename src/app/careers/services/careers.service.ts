@@ -20,7 +20,7 @@ export class CareersService {
   getPositions(filters: CareersFilter): Observable<any> {
     const params: HttpParams = new HttpParams()
     .set('search_title', filters.searchTitle)
-    .set('location', filters.location)
+    .set('stateCity', filters.location)
     .set('sector_cat', filters.sectorCat)
     .set('ajax_filter', filters.ajaxFilter)
     .set('posted', filters.posted)
