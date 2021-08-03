@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { AlertComponent } from './components/alert/alert.component';
 import { SimpleBannerComponent } from './components/simple-banner/simple-banner.component';
 import { FullAddressPipe } from './pipes/full-address.pipe';
+import { TabSetComponent } from './components/tab-set/tab-set.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FullAddressPipe } from './pipes/full-address.pipe';
     PreloaderComponent,
     AlertComponent,
     SimpleBannerComponent,
-    FullAddressPipe
+    FullAddressPipe,
+    TabSetComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { FullAddressPipe } from './pipes/full-address.pipe';
     AlertComponent,
     SimpleBannerComponent,
     FullAddressPipe,
+    TabSetComponent,
   ]
 })
 export class HarmonicLibModule { }

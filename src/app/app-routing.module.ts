@@ -17,6 +17,11 @@ const routes: Routes = [
     loadChildren: () => import('./app-logic/app-logic.module').then(m => m.AppLogicModule),
   },
   {
+    path: 'profile',
+    // canActivate: [AuthGuard, NotAdminGuard],
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
+  },
+  {
     path: 'applications',
     canActivate: [AuthGuard, NotAdminGuard],
     loadChildren: () => import('./applications/applications.module').then(m => m.ApplicationsModule),
