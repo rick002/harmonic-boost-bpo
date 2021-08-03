@@ -4,6 +4,9 @@
 <!-- App Banner Component -->
 <app-simple-banner [title]="bannerTitle" [content]="bannerContent"></app-simple-banner>
 
-<app-tab-set class="mt-5"></app-tab-set>
+<app-tab-set class="mt-5" [menuItems]="tabsMenu"></app-tab-set>
 
-<router-outlet></router-outlet>
+<div style="background-image: url(bg.jpg);">
+    <router-outlet></router-outlet>
+</div>
+
