@@ -19,7 +19,7 @@ import { TabSetComponent } from './components/tab-set/tab-set.component';
     AlertComponent,
     SimpleBannerComponent,
     FullAddressPipe,
-    TabSetComponent
+    TabSetComponent,
   ],
   imports: [
     CommonModule,
