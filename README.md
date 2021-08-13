@@ -6,14 +6,20 @@ This project was created with Angular Universal in order to provide organic SEO 
 
 Projects created with Angular SSR Support requires the following considerations:
 -> They have their own web container integrated based on the express framework, just need a web server like nginex to have the web container running.
+
 -> Some modules of the browser API like the local storage needs to be wrapped, cause they're not able in a ssr env. For further details please check src/app/landing/services/token.service.ts. 
+
 -> It's better to run the app locally in production mode before deploy it to the web, in spite of everything is going well in development configuration, to avoid deployment mistakes. 
+
 
 ## Main Scripts List
 
 . dev -> run the application in development mode
+
 . build:srr -> run the application locally in production mode
+
 . build:ssr -> generate the production assets
+
 . serve:ssr -> run the latest assets in production mode using angular universal
 
 ## About The API Integration
@@ -23,6 +29,7 @@ The backend integration was partially completed, just need to make sure to respe
 ## About The Proxy Server For Connecting The FrontEnd To The Backend
 
 . Proxy.conf.json: Is where the API configuration is defined, but it works in development mode only.
+
 . API Proxy: There's an API proxy configuration in the harmonic-boost-bpo/server.ts file to connect to the web services in production.
 
 ## Development server
@@ -48,7 +55,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Dependency List Recommended To Build The Rest Of the Views
 
 Text Editor: https://openbase.com/js/ngx-quill
+
 Drag and Drop File Chooser: https://www.npmjs.com/package/ngx-file-drop
+
 Charts: https://valor-software.com/ng2-charts/
+
 Google Maps Integration Tutorial: https://medium.com/@jkeung/integrating-google-maps-api-w-angular-7-e7672396ce2d
 
