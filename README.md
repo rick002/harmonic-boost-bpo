@@ -32,6 +32,52 @@ The backend integration was partially completed, just need to make sure to respe
 
 . API Proxy: There's an API proxy configuration in the harmonic-boost-bpo/server.ts file to connect to the web services in production.
 
+## About The FrontEnd Architecture
+
+If you go to the app-routing.module, where all the features modules are defined you will find:
+
+. Landing: The module of the landing page
+
+. Application Logic: The module where admin users can make the positions maintainability and upgrade and downgrade other admin users
+
+. Applications: The historic of applied positions
+
+. Profile: The module where the views described in the Boost BPO Profile Module Page Flow Analysis.xls will be placed.
+
+The best way to test the whole flow without an authentication service is to deactivate the authentication guards temporary.
+
+**Every module should respect this structure**
+
+. A routing module
+
+. An ng Module
+
+. A flat component with the name of the module
+
+. A dir for the models
+
+. A dir for the views
+
+. A dir for the components
+
+. A dir for the services
+
+**There are only two guards**
+
+. AuthGuard: To activate certain pages if the user is logged In
+
+. NonAuthGuard: To activate certain pages if the user is not logged In
+
+## Dependency List Recommended To Build The Rest Of the Views
+
+Text Editor: https://openbase.com/js/ngx-quill
+
+Drag and Drop File Chooser: https://www.npmjs.com/package/ngx-file-drop
+
+Charts: https://valor-software.com/ng2-charts/
+
+Google Maps Integration Tutorial: https://medium.com/@jkeung/integrating-google-maps-api-w-angular-7-e7672396ce2d
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -52,13 +98,5 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## Dependency List Recommended To Build The Rest Of the Views
 
-Text Editor: https://openbase.com/js/ngx-quill
-
-Drag and Drop File Chooser: https://www.npmjs.com/package/ngx-file-drop
-
-Charts: https://valor-software.com/ng2-charts/
-
-Google Maps Integration Tutorial: https://medium.com/@jkeung/integrating-google-maps-api-w-angular-7-e7672396ce2d
 
